@@ -20,5 +20,6 @@ dependencyResolutionManagement {
 	}
 }
 
-rootProject.name = "Fitnes"
+
+rootProject.name = "TransportAndroid"
 include(":app")
