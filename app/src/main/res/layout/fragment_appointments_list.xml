@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <HorizontalScrollView
+        android:id="@+id/hsvOrgUnitChips"
+        style="@style/ContainerChips"
+        app:layout_constraintBottom_toTopOf="@+id/hsvStatusChips"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgOrgUnitFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:chipSpacingHorizontal="@dimen/spacing" >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cAllOrgUnits"
+                style="@style/Chip"
+                android:text="@string/label_all" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/hsvStatusChips"
+        style="@style/ContainerChips"
+        app:layout_constraintBottom_toTopOf="@+id/swipeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hsvOrgUnitChips">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgEmployeeFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:chipSpacingHorizontal="@dimen/spacing" >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cAllAppointments"
+                style="@style/Chip"
+                android:text="@string/label_all" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cScheduled"
+                style="@style/Chip"
+                android:text="@string/label_scheduled" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cFinished"
+                style="@style/Chip"
+                android:text="@string/label_finished" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cCancelled"
+                style="@style/Chip"
+                android:text="@string/label_cancelled" />
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+<!--    <com.programdoo.transport.ui.views.ProgramSearchBar-->
+<!--        android:id="@+id/searchbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:cardBackgroundColor="@color/primaryLightest"-->
+<!--        android:layout_marginHorizontal="@dimen/edgePad"-->
+<!--        android:layout_marginBottom="@dimen/edgePad"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/hsvOrgUnitChips"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/swipeLayout"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
+<!--    </com.programdoo.transport.ui.views.ProgramSearchBar>-->
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        app:layout_constraintTop_toBottomOf="@id/hsvStatusChips"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/ContainerMain">
+
+        <ScrollView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <LinearLayout style="@style/ContainerList">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView"
+                    style="@style/ProgramCardView" >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvAppointments"
+                        style="@style/ContainerRecyclerView"/>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

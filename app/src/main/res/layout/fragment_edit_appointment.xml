@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        style="@style/ContainerMain"
+        app:layout_constraintBottom_toTopOf="@id/actionButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ContainerItemVertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.programdoo.transport.ui.views.SelectDialog
+                    android:id="@+id/selOrgUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_org_unit"
+                    android:layout_weight="1"
+                    android:paddingEnd="2dp">
+                </com.programdoo.transport.ui.views.SelectDialog>
+
+                <com.programdoo.transport.ui.views.SelectDialog
+                    android:id="@+id/selTrainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_trainer"
+                    android:layout_weight="1"
+                    android:paddingStart="2dp">
+                </com.programdoo.transport.ui.views.SelectDialog>
+            </LinearLayout>
+
+            <com.programdoo.transport.ui.views.SelectDialog
+                android:id="@+id/selTrainee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_trainee">
+            </com.programdoo.transport.ui.views.SelectDialog>
+
+            <com.programdoo.transport.ui.views.ProgramInputField
+                android:id="@+id/ifDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_date"
+                android:inputType="date"
+                android:imeOptions="actionNext">
+            </com.programdoo.transport.ui.views.ProgramInputField>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.programdoo.transport.ui.views.ProgramInputField
+                    android:id="@+id/ifStartTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_starts"
+                    android:inputType="time"
+                    android:imeOptions="actionNext"
+                    android:layout_weight="1"
+                    android:paddingEnd="2dp">
+                </com.programdoo.transport.ui.views.ProgramInputField>
+
+                <com.programdoo.transport.ui.views.ProgramInputField
+                    android:id="@+id/ifEndTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_ends"
+                    android:inputType="time"
+                    android:imeOptions="actionNext"
+                    android:layout_weight="1"
+                    android:paddingStart="2dp">
+                </com.programdoo.transport.ui.views.ProgramInputField>
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/BottomButtonBar">
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/sCancelled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/label_cancelled"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/sFinished"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/sFinished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/label_finished"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sCancelled"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.programdoo.transport.ui.views.ProgramInputField
+                android:id="@+id/ifDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_description"
+                android:inputType="textImeMultiLine"
+                app:multiline="true"
+                android:imeOptions="actionNext"
+                android:visibility="gone">
+            </com.programdoo.transport.ui.views.ProgramInputField>
+
+            <TextView
+                android:id="@+id/buttonRecurrence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_add_recurrence"
+                android:textColor="@color/primary"
+                style="@style/ProgramTextView.LinkButton"
+                android:layout_marginTop="12dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/recurrenceInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/tertiaryLightest"
+                app:strokeColor="@color/tertiaryLightest"
+                style="@style/ProgramCardView"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    style="@style/ProgramCardView.Container">
+
+                    <com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble
+                        android:id="@+id/recurrenceDateSpan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:dividerColor="@color/tertiary"
+                        app:firstItemLabel="@string/label_from"
+                        app:secondItemLabel="@string/label_to"/>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:dividerColor="@color/tertiary"/>
+
+                    <com.programdoo.transport.ui.views.ProgramCardViewInfoItem
+                        android:id="@+id/recurrenceWeekdays"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:itemLabel="@string/label_weekdays"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/actionButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/BottomButtonBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            style="@style/ProgramButton.Cancel"
+            android:text="@string/label_cancel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/buttonSave"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+        <Button
+            android:id="@+id/buttonSave"
+            style="@style/ProgramButton.Primary"
+            android:text="@string/label_save"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/buttonCancel"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/buttonTrialTrainee"
+            style="@style/ProgramButton.Secondary"
+            android:text="@string/label_add_trial_trainee"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/buttonCancel"
+            app:layout_constraintEnd_toStartOf="@id/buttonSave" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root"
+    style="@style/ListItem"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/edgePad">
+
+        <TextView
+            android:id="@+id/tvActivityName"
+            style="@style/ProgramTextView.Regular"
+            app:drawableTint="@color/tertiaryLighter"
+            android:layout_width="170dp"
+            android:layout_height="24dp"
+            app:drawableStartCompat="@drawable/icon_activity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="162dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="205dp"
+            app:drawableStartCompat="@drawable/icon_date_range_medium"
+            app:layout_constraintStart_toEndOf="@+id/tvActivityName"
+            app:layout_constraintEnd_toStartOf="@+id/tvRating"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvRating"
+            style="@style/ProgramTextView.End"
+            android:layout_height="24dp"
+            app:drawableEndCompat="@drawable/icon_tag_small"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvDate"
+             />
+
+        <TextView
+            android:id="@+id/tvActivityDescription"
+            style="@style/ProgramTextView.Small"
+            android:paddingHorizontal="@dimen/listItemSmallTextPad"
+            app:drawableStartCompat="@drawable/outline_stylus_note_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvActivityName"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvTrainerComment"
+            style="@style/ProgramTextView.Small"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="@dimen/listItemSmallTextPad"
+            app:drawableStartCompat="@drawable/outline_stylus_note_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvActivityDescription"
+            app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

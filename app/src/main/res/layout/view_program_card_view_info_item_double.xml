@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:id="@+id/llFirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/itemVerticalPad"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/tvFirstLabel"
+                style="@style/ProgramTextView.Small"/>
+
+            <TextView
+                android:id="@+id/tvFirstText"
+                style="@style/ProgramTextView.Regular" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            style="@style/ProgramVerticalDivider" />
+
+        <LinearLayout
+            android:id="@+id/llSecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/itemVerticalPad"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/tvSecondLabel"
+                style="@style/ProgramTextView.Small"/>
+
+            <TextView
+                android:id="@+id/tvSecondText"
+                style="@style/ProgramTextView.Regular"/>
+        </LinearLayout>
+    </LinearLayout>
+</merge>

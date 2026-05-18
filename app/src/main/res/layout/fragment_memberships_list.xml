@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <HorizontalScrollView
+        android:id="@+id/hsvOrgUnitChips"
+        style="@style/ContainerChips"
+        app:layout_constraintBottom_toTopOf="@+id/hsvFilterChips"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgOrgUnitFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:chipSpacingHorizontal="@dimen/spacing" >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cAllOrgUnits"
+                style="@style/Chip"
+                android:text="@string/label_all" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/hsvFilterChips"
+        style="@style/ContainerChips"
+        app:layout_constraintBottom_toTopOf="@+id/swipeRefresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hsvOrgUnitChips">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgEmployeeFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:chipSpacingHorizontal="@dimen/spacing" >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cAll"
+                style="@style/Chip"
+                android:text="@string/label_all" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cActive"
+                style="@style/Chip"
+                android:text="@string/label_active" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cInactive"
+                style="@style/Chip"
+                android:text="@string/label_inactive" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        style="@style/ContainerMain"
+        app:layout_constraintTop_toBottomOf="@id/hsvFilterChips"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                style="@style/ContainerList">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView"
+                    style="@style/ProgramCardView">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMemberships"
+                        style="@style/ContainerRecyclerView">
+                    </androidx.recyclerview.widget.RecyclerView>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.programdoo.transport.ui.views.ProgramFloatingActionButton
+        android:id="@+id/NewMembership"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:backgroundTint="@color/primaryLighter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

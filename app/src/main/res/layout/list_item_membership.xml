@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root"
+    style="@style/ListItem"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingVertical="@dimen/edgePad">
+
+    <TextView
+        android:id="@+id/tvTraineeName"
+        app:drawableStartCompat="@drawable/icon_trainee_medium"
+        style="@style/ProgramTextView.Regular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvValidFrom"/>
+
+    <TextView
+        android:id="@+id/tvValidFrom"
+        app:drawableStartCompat="@drawable/icon_date_range_small"
+        style="@style/ProgramTextView.Small"
+        android:paddingHorizontal="@dimen/listItemSmallTextPad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTraineeName"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvValidTo"
+        app:drawableEndCompat="@drawable/icon_date_range_small"
+        style="@style/ProgramTextView.Small.End"
+        android:paddingHorizontal="@dimen/listItemSmallTextPad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sessions"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/sessions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvValidTo">
+
+        <TextView
+            android:id="@+id/sessionsLeft"
+            style="@style/ProgramTextView.End" />
+        <TextView
+            style="@style/ProgramTextView.Regular"
+            android:text="@string/label_of_total"
+            android:paddingHorizontal="2dp"
+            android:textColor="@color/secondaryLighter"/>
+        <TextView
+            android:id="@+id/totalTrainings"
+            style="@style/ProgramTextView.End" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

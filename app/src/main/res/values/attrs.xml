@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="defaultText" format="string" />
+
+    <declare-styleable name="ProgramCardViewInfoItem">
+        <attr name="itemLabel" format="string" />
+        <attr name="itemText" format="string" />
+        <attr name="itemMultiline" format="boolean" />
+        <attr name="defaultText" />
+    </declare-styleable>
+
+    <declare-styleable name="ProgramCardViewInfoItemDouble">
+        <attr name="firstItemLabel" format="string" />
+        <attr name="firstItemText" format="string" />
+        <attr name="secondItemLabel" format="string" />
+        <attr name="secondItemText" format="string" />
+        <attr name="dividerColor" format="color" />
+        <attr name="defaultText" />
+    </declare-styleable>
+
+    <declare-styleable name="ProgramInputField">
+        <attr name="multiline" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ProgramSearchBar">
+        <attr name="cardBackgroundColor" format="color" />
+        <attr name="expandedHintColor" format="color" />
+    </declare-styleable>
+</resources>

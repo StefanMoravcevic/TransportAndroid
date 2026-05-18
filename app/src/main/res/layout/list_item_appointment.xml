@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root"
+    style="@style/ListItem"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingVertical="@dimen/edgePad">
+
+    <TextView
+        android:id="@+id/tvDate"
+        app:drawableStartCompat="@drawable/icon_date_range_medium"
+        style="@style/ProgramTextView.Regular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvTrainer"/>
+
+    <LinearLayout
+        android:id="@+id/llTimes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvOrgUnitName">
+
+        <TextView
+            android:id="@+id/tvStartTime"
+            style="@style/ProgramTextView.End"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="1dp"
+            android:text="-"
+            android:foregroundTint="@color/secondaryLighter">
+        </TextView>
+        <TextView
+            android:id="@+id/tvEndTime"
+            app:drawableEndCompat="@drawable/icon_time_medium"
+            style="@style/ProgramTextView.End" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTrainer"
+        app:drawableStartCompat="@drawable/icon_trainer_small"
+        android:paddingHorizontal="@dimen/listItemSmallTextPad"
+        style="@style/ProgramTextView.Small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDate"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/ProgramTextView.Small"
+        android:textAlignment="center"
+        android:textColor="@color/primaryLighter"
+        app:layout_constraintStart_toEndOf="@+id/tvTrainer"
+        app:layout_constraintEnd_toStartOf="@+id/tvOrgUnitName"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/tvOrgUnitName"
+        android:paddingHorizontal="@dimen/listItemSmallTextPad"
+        app:drawableEndCompat="@drawable/icon_org_unit_small"
+        style="@style/ProgramTextView.Small.End"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llTimes"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

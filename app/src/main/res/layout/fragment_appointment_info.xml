@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="@dimen/edgePad">
+
+    <ScrollView
+        style="@style/ContainerMain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ContainerItemVertical" >
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/ProgramCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/ProgramCardView.Container">
+
+                    <com.programdoo.transport.ui.views.ProgramCardViewInfoItem
+                        android:id="@+id/iiTrainee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:itemLabel="@string/label_trainee"
+                        app:defaultText="@string/label_unknown">
+                    </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:dividerColor="@color/primaryLighter">
+                    </com.google.android.material.divider.MaterialDivider>
+
+                    <com.programdoo.transport.ui.views.ProgramCardViewInfoItem
+                        android:id="@+id/iiTrainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:itemLabel="@string/label_trainer"
+                        app:defaultText="@string/label_unknown">
+                    </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:dividerColor="@color/primaryLighter">
+                    </com.google.android.material.divider.MaterialDivider>
+
+                    <com.programdoo.transport.ui.views.ProgramCardViewInfoItem
+                        android:id="@+id/iiOrgUnit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:itemLabel="@string/label_org_unit"
+                        app:defaultText="@string/label_unknown">
+                    </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/ProgramCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/ProgramCardView.Container" >
+
+                    <com.programdoo.transport.ui.views.ProgramCardViewInfoItem
+                        android:id="@+id/iiDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:itemLabel="@string/label_date"
+                        app:defaultText="@string/label_unknown">
+                    </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:dividerColor="@color/primaryLighter">
+                    </com.google.android.material.divider.MaterialDivider>
+
+                    <com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble
+                        android:id="@+id/iidStartEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:firstItemLabel="@string/label_starts"
+                        app:secondItemLabel="@string/label_ends"
+                        app:defaultText="@string/label_unknown">
+                    </com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/ProgramCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/ProgramCardView.Container" >
+
+                    <TextView
+                        android:id="@+id/tvRecurrenceMsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginVertical="8dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/msg_no_recurrence"
+                        android:visibility="gone"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <LinearLayout
+                        android:id="@+id/llRecurrence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.programdoo.transport.ui.views.ProgramCardViewInfoItem
+                            android:id="@+id/iiRecurrence"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:itemLabel="@string/label_recurrence"
+                            app:defaultText="@string/label_unknown">
+                        </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:dividerColor="@color/primaryLighter">
+                        </com.google.android.material.divider.MaterialDivider>
+
+                        <com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble
+                            android:id="@+id/iidRecurFromTo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:firstItemLabel="@string/label_from"
+                            app:secondItemLabel="@string/label_to"
+                            app:defaultText="@string/label_unknown">
+                        </com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/ProgramCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/ProgramCardView.Container" >
+
+                    <com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble
+                        android:id="@+id/iidMembershipExpirySessionsLeft"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:firstItemLabel="@string/label_membership_expiry_date"
+                        app:secondItemLabel="@string/label_available_sessions"
+                        app:defaultText="@string/label_unknown">
+                    </com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/ProgramCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/ProgramCardView.Container" >
+
+                    <TextView
+                        android:id="@+id/tvDescriptionMsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginVertical="8dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/msg_no_description"
+                        android:visibility="gone"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <com.programdoo.transport.ui.views.ProgramCardViewInfoItem
+                        android:id="@+id/iiDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:itemLabel="@string/label_description"
+                        app:itemMultiline="true">
+                    </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

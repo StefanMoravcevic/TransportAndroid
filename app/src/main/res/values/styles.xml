@@ -1,0 +1,174 @@
+<resources>
+
+    <style name="Widget.Theme.Fitnes.MyView" parent="">
+        <item name="android:background">@color/white</item>
+
+    </style>
+
+    <style name="ContainerMain" >
+        <item name="android:fillViewport">true</item>
+        <item name="android:paddingHorizontal">@dimen/edgePad</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="ContainerList">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ContainerSupport" >
+        <item name="android:paddingHorizontal">@dimen/edgePad</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ContainerChips">
+        <item name="android:paddingHorizontal">@dimen/edgePad</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ContainerItemVertical">
+        <item name="android:orientation">vertical</item>
+        <item name="android:divider">@drawable/horizontal_spacer_8dp</item>
+        <item name="android:showDividers">middle</item>
+    </style>
+
+    <style name="ContainerItemHorizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="ContainerRecyclerView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+<!--        <item name="android:paddingHorizontal">@dimen/itemContainerPad</item>-->
+    </style>
+
+    <style name="ListItem">
+        <item name="android:paddingHorizontal">@dimen/itemContainerPad</item>
+    </style>
+
+    <style name="ProgramCardView" parent="Widget.Material3.CardView.Outlined">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardBackgroundColor">@color/primaryLightest</item>
+        <item name="strokeColor">@color/primaryLightest</item>
+        <item name="cardCornerRadius">@dimen/cornerRadius</item>
+    </style>
+
+    <style name="ProgramCardView.Container">
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingHorizontal">@dimen/itemContainerPad</item>
+    </style>
+
+    <style name="BottomButtonBar">
+        <item name="android:paddingVertical">@dimen/halfEdgePad</item>
+        <item name="android:paddingHorizontal">@dimen/edgePad</item>
+    </style>
+
+    <style name="ButtonGroupHorizontal">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:divider">@drawable/vertical_spacer_2dp</item>
+        <item name="android:showDividers">middle</item>
+    </style>
+
+    <style name="ProgramButton" parent="Widget.Material3.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">@dimen/cornerRadius</item>
+        <item name="android:textColor">@color/secondary</item>
+    </style>
+
+    <style name="ProgramButton.Cancel" parent="ProgramButton">
+        <item name="android:backgroundTint">@color/secondary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ProgramButton.Primary" parent="ProgramButton">
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ProgramButton.Secondary" parent="ProgramButton">
+        <item name="android:backgroundTint">@color/primaryLighter</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ProgramButton.Tertiary" parent="ProgramButton">
+        <item name="android:backgroundTint">@color/tertiary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ProgramTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:freezesText">true</item>
+<!--        <item name="drawableTint">@color/primaryLighter</item>-->
+        <item name="android:drawablePadding">@dimen/textIconPadding</item>
+    </style>
+
+    <style name="ProgramTextView.Small" parent="ProgramTextView">
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+        <item name="android:textColor">@color/secondaryLighter</item>
+    </style>
+
+    <style name="ProgramTextView.Small.End" parent="ProgramTextView.Small">
+        <item name="android:textAlignment">textEnd</item>
+    </style>
+
+    <style name="ProgramTextView.Regular" parent="ProgramTextView">
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+        <item name="android:textColor">@color/secondary</item>
+    </style>
+
+    <style name="ProgramTextView.End" parent="ProgramTextView.Regular">
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
+    <style name="ProgramTextView.LinkButton" parent="ProgramTextView">
+        <item name="android:textAppearance">?attr/textAppearanceBodyLarge</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="ProgramVerticalDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/primaryLighter</item>
+        <item name="android:layout_marginVertical">@dimen/itemContainerPad</item>
+        <item name="android:layout_marginHorizontal">@dimen/edgePad</item>
+    </style>
+
+    <style name="TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabGravity">fill</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabIndicatorGravity">top</item>
+    </style>
+
+    <style name="Chip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
+        <item name="android:checkable">true</item>
+        <item name="checkedIconVisible">true</item>
+        <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="chipStrokeColor">@color/chip_stroke</item>
+        <item name="checkedIcon">@drawable/icon_checked_circle</item>
+        <item name="checkedIconTint">@color/secondary</item>
+    </style>
+
+</resources>

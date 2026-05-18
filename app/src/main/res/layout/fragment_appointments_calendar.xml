@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <HorizontalScrollView
+        android:id="@+id/hsvOrgUnitChips"
+        style="@style/ContainerSupport"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/hsvEmployeeChips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgOrgUnitFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:chipSpacingHorizontal="@dimen/spacing" >
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+    <HorizontalScrollView
+        android:id="@+id/hsvEmployeeChips"
+        style="@style/ContainerSupport"
+        app:layout_constraintTop_toBottomOf="@+id/hsvOrgUnitChips"
+        app:layout_constraintBottom_toTopOf="@+id/swipeRefresh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgEmployeeFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:chipSpacingHorizontal="@dimen/spacing" >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cAllEmployees"
+                android:checked="true"
+                android:text="@string/label_all"
+                style="@style/Chip">
+            </com.google.android.material.chip.Chip>
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        style="@style/ContainerMain"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hsvEmployeeChips"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/llCalendar"
+                style="@style/ProgramCardView"
+                app:strokeColor="@color/transparent">
+
+                <com.alamkanak.weekview.WeekView
+                    android:id="@+id/calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:timeColumnBackgroundColor="@color/primaryLightest"
+                    app:headerBackgroundColor="@color/primaryLightest"
+                    app:dayBackgroundColor="@color/tertiaryLightest"
+                    app:todayBackgroundColor="@color/white"
+                    app:headerPadding="10dp"
+                    app:showWeekNumber="true"
+                    app:weekNumberBackgroundColor="@color/secondary"
+                    app:weekNumberBackgroundCornerRadius="@dimen/cornerRadius"
+                    app:todayHeaderTextColor="@color/secondary"
+                    app:headerTextColor="@color/secondaryLighter"
+                    app:timeColumnPadding="6dp"
+                    app:timeColumnTextColor="@color/secondary"
+                    app:weekendHeaderTextColor="@color/primary"
+                    app:eventCornerRadius="@dimen/cornerRadius"
+                    app:showNowLine="true"
+                    app:showNowLineDot="true"
+                    app:nowLineDotRadius="3dp"
+                    app:nowLineStrokeWidth="2dp"
+                    app:eventMarginVertical="2dp"
+                    app:overlappingEventGap="2dp"
+                    app:numberOfVisibleDays="1"
+                    app:minHourHeight="80dp">
+                </com.alamkanak.weekview.WeekView>
+            </com.google.android.material.card.MaterialCardView>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.programdoo.transport.ui.views.ProgramFloatingActionButton
+        android:id="@+id/fabNewAppointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:backgroundTint="@color/primaryLighter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </com.programdoo.transport.ui.views.ProgramFloatingActionButton>
+</androidx.constraintlayout.widget.ConstraintLayout>
