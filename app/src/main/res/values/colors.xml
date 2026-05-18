@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#32c5f4</color>
+    <color name="primaryLighter">#b4e580</color>
+    <color name="primaryLightest">#f3fbe9</color>
+    <color name="primaryDarker">#5d9220</color>
+    <color name="primaryVariant">@color/primaryLighter</color>
+    <color name="secondary">#020202</color>
+    <color name="secondaryLighter">#595959</color>
+    <color name="secondaryLightest">#999999</color>
+    <color name="secondaryVariant">@color/secondaryLighter</color>
+    <color name="tertiary">#bfbfbf</color>
+    <color name="tertiaryLighter">#d4d4d4</color>
+    <color name="tertiaryLightest">#f2f2f2</color>
+    <color name="trial">#7b99b7</color>
+    <color name="trialLighter">#adbfd2</color>
+    <color name="trialDarker">#517394</color>
+    <color name="warning">#e2cd40</color>
+    <color name="warningLighter">#efe28f</color>
+    <color name="warningDarker">#dec521</color>
+    <color name="disabled">#E9CAC6C6</color>
+    <color name="surface">#F5F5F5</color>
+    <color name="error">#b30000</color>
+    <color name="errorLighter">#d25151</color>
+    <color name="criticalDarker">#b86e00</color>
+    <color name="critical">#e68a00</color>
+    <color name="criticalLighter">#e8ab4f</color>
+    <color name="accent">#171563</color>
+    <color name="controlHighlight">#8CBF4E</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
+    <color name="transparent">#00ffffff</color>
+
+</resources>

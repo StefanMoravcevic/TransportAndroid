@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root"
+    style="@style/ListItem"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingVertical="@dimen/edgePad">
+
+    <TextView
+        android:id="@+id/tvName"
+        app:drawableStartCompat="@drawable/icon_tag_medium"
+        style="@style/ProgramTextView.Regular"
+        app:drawableTint="@color/tertiaryLighter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvPhoneNumber"/>
+
+    <TextView
+        android:id="@+id/tvPhoneNumber"
+        app:drawableStartCompat="@drawable/icon_phone_small"
+        android:paddingHorizontal="@dimen/listItemSmallTextPad"
+        style="@style/ProgramTextView.Small"
+        app:drawableTint="@color/tertiaryLighter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvPlaceholder"
+        android:paddingHorizontal="@dimen/listItemSmallTextPad"
+        style="@style/ProgramTextView.Small.End"
+        app:drawableTint="@color/tertiaryLighter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvAddress"/>
+
+    <TextView
+        android:id="@+id/tvAddress"
+        app:drawableEndCompat="@drawable/icon_org_unit_small"
+        style="@style/ProgramTextView.End"
+        app:drawableTint="@color/tertiaryLighter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPlaceholder"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

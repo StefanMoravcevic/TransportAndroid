@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="membership"
+            type="com.programdoo.transport.data.models.dtos.memberships.SaveMembershipRequestModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/actionButtons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Membership i Trainee -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="8dp">
+
+                    <com.programdoo.transport.ui.views.SelectDialog
+                        android:id="@+id/selMembershipCard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:hint="@string/label_membershipCard" />
+
+                    <com.programdoo.transport.ui.views.SelectDialog
+                        android:id="@+id/selTrainees"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:hint="@string/label_trainee" />
+                </LinearLayout>
+
+                <!-- Purchase Date i Price -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="8dp">
+
+                    <com.programdoo.transport.ui.views.ProgramInputField
+                        android:id="@+id/purchaseDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:hint="@string/label_purchaseDate"
+                        android:inputType="date"
+                        android:imeOptions="actionNext" />
+
+                    <com.programdoo.transport.ui.views.ProgramInputField
+                        android:id="@+id/price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:hint="@string/label_price"
+                        android:inputType="numberDecimal"
+                        android:imeOptions="actionNext" />
+                </LinearLayout>
+
+                <!-- Valid From i Valid To -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="8dp">
+
+                    <com.programdoo.transport.ui.views.ProgramInputField
+                        android:id="@+id/validFrom"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:hint="@string/label_validFrom"
+                        android:inputType="date"
+                        android:imeOptions="actionNext" />
+
+                    <com.programdoo.transport.ui.views.ProgramInputField
+                        android:id="@+id/validTo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:hint="@string/label_validTo"
+                        android:inputType="date"
+                        android:imeOptions="actionNext" />
+                </LinearLayout>
+
+                <!-- Number of Appointments -->
+                <com.programdoo.transport.ui.views.ProgramInputField
+                    android:id="@+id/numberOfAppointments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_numberOfAppointments"
+                    android:imeOptions="actionNext"
+                    android:inputType="number" />
+
+                <!-- Payment Method i Payment Date -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="8dp">
+
+                    <com.programdoo.transport.ui.views.SelectDialog
+                        android:id="@+id/selPaymentMethod"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:hint="@string/label_paymentMethod" />
+
+                    <com.programdoo.transport.ui.views.ProgramInputField
+                        android:id="@+id/paymentDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:hint="@string/label_paymentDate"
+                        android:inputType="date"
+                        android:imeOptions="actionNext" />
+                </LinearLayout>
+
+                <!-- Currency -->
+                <com.programdoo.transport.ui.views.SelectDialog
+                    android:id="@+id/selCurrency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_currency" />
+
+                <!-- Comment -->
+                <com.programdoo.transport.ui.views.ProgramInputField
+                    android:id="@+id/comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:hint="@string/label_comment"
+                    android:imeOptions="actionNext"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/actionButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/BottomButtonBar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView">
+
+            <Button
+                android:id="@+id/buttonCancel"
+                style="@style/ProgramButton.Cancel"
+                android:text="@string/label_cancel"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/buttonSave"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+
+            <Button
+                android:id="@+id/buttonSave"
+                style="@style/ProgramButton.Primary"
+                android:text="@string/label_save"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/buttonCancel"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

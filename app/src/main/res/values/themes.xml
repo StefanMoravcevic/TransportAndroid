@@ -1,0 +1,49 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Fitnes" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondaryVariant</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorOnBackground">@color/black</item>
+
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/black</item>
+
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="colorControlHighlight">@color/controlHighlight</item>
+
+        <item name="android:textColor">@color/secondaryVariant</item>
+
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+    </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
+
+    <style name="ToolbarPopupTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColorPrimary">@color/primary</item>
+    </style>
+
+    <style name="ToolbarIconTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/primary</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+    <style name="ChipTheme" parent="Widget.Material3.Chip.Assist.Elevated">
+        <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="chipStrokeColor">@color/chip_stroke</item>
+    </style>
+
+    <style name="Theme.GetFit" parent="Theme.Fitnes" />
+</resources>
