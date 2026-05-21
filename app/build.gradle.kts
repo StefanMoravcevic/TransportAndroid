@@ -45,6 +45,7 @@ dependencies {
 	implementation(libs.navigation.fragment)
 	implementation(libs.navigation.ui)
 	implementation(libs.jwt.decode)
+	implementation("com.google.android.gms:play-services-location:21.0.1")
 
 	// api
 	implementation(libs.okhttp)
@@ -60,6 +61,7 @@ dependencies {
 	implementation(libs.hilt)
 	implementation(libs.annotation)
 	implementation(libs.activity)
+	implementation(libs.play.services.location)
 	annotationProcessor(libs.hilt.compiler)
 	// For instrumentation tests
 	//androidTestImplementation("com.google.dagger:hilt-android-testing:2.57.1")

@@ -80,6 +80,17 @@
                 android:text="@string/label_logout"
                 app:drawableTint="@color/primary"
                 app:drawableTopCompat="@drawable/icon_menu_logout"/>
+
+            <TextView
+                android:id="@+id/tvScanPackages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="@string/label_ScanPackages"
+                app:drawableTint="@color/primary"
+                app:drawableTopCompat="@drawable/icon_menu_scan"/>
         </GridLayout>
     </ScrollView>
 </LinearLayout>

@@ -126,4 +126,5 @@
     <string name="msg_not_implemented">Funkcionalnost još nije implementirana!</string>
     <string name="label_scheduled">Zakazani</string>
     <string name="label_logout">Izloguj se</string>
+    <string name="label_ScanPackages">Skeniranje paketa</string>
 </resources>
