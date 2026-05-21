@@ -9,6 +9,7 @@ import com.programdoo.transport.data.services.MasterDataService;
 import com.programdoo.transport.data.services.MembershipCardsService;
 import com.programdoo.transport.data.services.MembershipsService;
 import com.programdoo.transport.data.services.PromotionsService;
+import com.programdoo.transport.data.services.ScannedPackagesService;
 import com.programdoo.transport.data.services.TraineesService;
 
 import javax.inject.Singleton;
@@ -67,5 +68,10 @@ public class ServiceModule {
     @Provides
     MasterDataService providesMasterDataService(@Authenticated Retrofit retrofit) {
         return retrofit.create(MasterDataService.class);
+    }
+
+    @Provides
+    ScannedPackagesService providesScannedPackagesService(@Authenticated Retrofit retrofit) {
+        return retrofit.create(ScannedPackagesService.class);
     }
 }

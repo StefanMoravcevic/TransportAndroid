@@ -32,6 +32,7 @@ calendar = "2.9.0"
 # thellmund android week view
 weekview = "5.3.2"
 swipe-refresh-layout = "1.2.0"
+playServicesLocation = "21.3.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -71,6 +72,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 weekview = { module = "com.github.thellmund.Android-Week-View:core", version.ref="weekview" }
 weekview-jsr = { module = "com.github.thellmund.Android-Week-View:jsr310", version.ref="weekview" }
 swipe-refresh-layout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swipe-refresh-layout" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

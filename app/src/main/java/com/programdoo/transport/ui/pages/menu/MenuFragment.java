@@ -17,6 +17,7 @@ import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.pages.appointments.AppointmentsActivity;
 import com.programdoo.transport.ui.pages.login.LoginActivity;
 import com.programdoo.transport.ui.pages.memberships.MembershipActivity;
+import com.programdoo.transport.ui.pages.scannedpackages.ScannedPackageActivity;
 import com.programdoo.transport.ui.pages.settings.SettingsActivity;
 import com.programdoo.transport.ui.pages.trainees.TraineesActivity;
 import com.programdoo.transport.utils.Constants;
@@ -83,6 +84,11 @@ public class MenuFragment extends BaseFragment {
             viewModel.getPreferences().clearTokens();
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
+        });
+
+        binding.tvScanPackages.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), ScannedPackageActivity.class);
+            startActivity(intent);
         });
     }
 }
