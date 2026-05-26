@@ -38,6 +38,7 @@ public class Constants {
     public static final String FRAG_TIME_PICKER = "frag_timePicker";
     public static final String FRAG_EDIT_SETTINGS = "frag_editSettings";
     public static final String FRAG_EDIT_RECURRENCE_PATTERN = "frag_editRecurrencePattern";
+    public static final String FRAG_NOTIFICATIONS = "frag_notifications";
 
     // cross fragment messages
     public static final String MSG_TRAINEE_CREATED = "msg_traineeCreated";

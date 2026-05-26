@@ -3,6 +3,7 @@ package com.programdoo.transport.ui.pages.menu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,22 +13,30 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.programdoo.transport.R;
 import com.programdoo.transport.databinding.FragmentMenuBinding;
+import com.programdoo.transport.ui.adapters.ToolbarAction;
 import com.programdoo.transport.ui.pages.BaseActivity;
 import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.pages.appointments.AppointmentsActivity;
 import com.programdoo.transport.ui.pages.login.LoginActivity;
 import com.programdoo.transport.ui.pages.memberships.MembershipActivity;
+import com.programdoo.transport.ui.pages.notifications.NotificationActivity;
+import com.programdoo.transport.ui.pages.poolCarReservations.PoolCarReservationsActivity;
 import com.programdoo.transport.ui.pages.scannedpackages.ScannedPackageActivity;
 import com.programdoo.transport.ui.pages.settings.SettingsActivity;
 import com.programdoo.transport.ui.pages.trainees.TraineesActivity;
+import com.programdoo.transport.ui.viewmodels.employees.ExpiringDocumentsViewModel;
 import com.programdoo.transport.utils.Constants;
 import com.programdoo.transport.ui.viewmodels.MenuViewModel;
+
+import java.util.Collections;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MenuFragment extends BaseFragment {
     FragmentMenuBinding binding;
+
+    private ExpiringDocumentsViewModel expiringViewModel;
     MenuViewModel viewModel;
 
     @Override
@@ -47,7 +56,9 @@ public class MenuFragment extends BaseFragment {
         /* ovde ne dovlacimo view model jer nam nije potreban. ovaj fragment sluzi samo kao
          * prelaz na activity-je u kojim se zapravo izvrsava logika. */
         viewModel = new ViewModelProvider(this).get(MenuViewModel.class);
+
         return binding.getRoot();
+
     }
 
     @Override
@@ -55,6 +66,28 @@ public class MenuFragment extends BaseFragment {
             @NonNull View view,
             @Nullable Bundle savedStateInstance) {
         ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_menu));
+        ((BaseActivity) requireActivity())
+                .setToolbarActions(
+                        Collections.singletonList(
+                                new ToolbarAction(
+                                        1001,
+                                        R.drawable.icon_notification,
+                                        R.string.notifications,
+                                        MenuItem.SHOW_AS_ACTION_ALWAYS,
+                                        R.color.primary,
+                                        item -> {
+                                            Intent intent = new Intent(requireActivity(),
+                                                    NotificationActivity.class);
+                                            startActivity(intent);
+                                            return true;
+                                        }
+                                )
+                        )
+                );
+        expiringViewModel = new ViewModelProvider(this).get(ExpiringDocumentsViewModel.class);
+
+        int employeeId = expiringViewModel.getLoggedEmployeeId();
+        expiringViewModel.loadExpiringDocuments(employeeId);
 
        /* binding.tvTrainees.setOnClickListener(v -> {
             *//* intent se koristi kad se prelazi iz jednog activity-ja u drugi.
@@ -88,6 +121,11 @@ public class MenuFragment extends BaseFragment {
 
         binding.tvScanPackages.setOnClickListener(v -> {
             Intent intent = new Intent(requireActivity(), ScannedPackageActivity.class);
+            startActivity(intent);
+        });
+
+        binding.tvPoolCars.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), PoolCarReservationsActivity.class);
             startActivity(intent);
         });
     }

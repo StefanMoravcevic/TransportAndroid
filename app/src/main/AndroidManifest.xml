@@ -55,6 +55,14 @@
             android:name="com.programdoo.transport.ui.pages.scannedpackages.ScannedPackageActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name="com.programdoo.transport.ui.pages.poolCarReservations.PoolCarReservationsActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name="com.programdoo.transport.ui.pages.notifications.NotificationActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

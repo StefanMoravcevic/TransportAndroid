@@ -127,4 +127,8 @@
     <string name="label_scheduled">Zakazani</string>
     <string name="label_logout">Izloguj se</string>
     <string name="label_ScanPackages">Skeniranje paketa</string>
+    <string name="label_PoolCar">Zajedničko vozilo</string>
+    <string name="label_dateFrom">Datum od</string>
+    <string name="label_dateTo">Datum do</string>
+    <string name="notifications">Obaveštenja</string>
 </resources>
