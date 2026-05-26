@@ -1,6 +1,7 @@
 package com.programdoo.transport.data.repositories;
 
 import com.programdoo.transport.data.eventbus.AuthEventBus;
+import com.programdoo.transport.data.models.dtos.employees.EmployeeDocumentAlertDto;
 import com.programdoo.transport.data.models.dtos.employees.EmployeeDto;
 import com.programdoo.transport.data.models.requests.employees.SearchEmployeesParams;
 import com.programdoo.transport.data.models.responses.ResponseModelList;
@@ -24,6 +25,12 @@ public class EmployeesRepository {
     @Getter
     private final Observable<ResponseModelList<EmployeeDto>> employees;
 
+    private final BehaviorSubject<Integer> expiringDocumentsRequests
+            = BehaviorSubject.create();
+
+    @Getter
+    private final Observable<ResponseModelList<EmployeeDocumentAlertDto>> expiringDocuments;
+
     @Inject
     public EmployeesRepository(
             EmployeesService service,
@@ -32,9 +39,18 @@ public class EmployeesRepository {
 
         employees = RepositoryOperators.createDataStream(
                 searchEmployeesRequests, service::searchEmployees);
+
+        expiringDocuments = RepositoryOperators.createDataStream(
+                expiringDocumentsRequests,
+                service::getEmployeeExpiringDocuments
+        );
     }
 
     public void searchEmployees(SearchEmployeesParams searchParams) {
         searchEmployeesRequests.onNext(searchParams);
+    }
+
+    public void loadExpiringDocuments(int employeeId) {
+        expiringDocumentsRequests.onNext(employeeId);
     }
 }

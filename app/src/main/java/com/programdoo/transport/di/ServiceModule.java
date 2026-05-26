@@ -8,9 +8,11 @@ import com.programdoo.transport.data.services.EmployeesService;
 import com.programdoo.transport.data.services.MasterDataService;
 import com.programdoo.transport.data.services.MembershipCardsService;
 import com.programdoo.transport.data.services.MembershipsService;
+import com.programdoo.transport.data.services.PoolCarReservationsService;
 import com.programdoo.transport.data.services.PromotionsService;
 import com.programdoo.transport.data.services.ScannedPackagesService;
 import com.programdoo.transport.data.services.TraineesService;
+import com.programdoo.transport.data.services.VehiclesService;
 
 import javax.inject.Singleton;
 
@@ -73,5 +75,15 @@ public class ServiceModule {
     @Provides
     ScannedPackagesService providesScannedPackagesService(@Authenticated Retrofit retrofit) {
         return retrofit.create(ScannedPackagesService.class);
+    }
+
+    @Provides
+    PoolCarReservationsService providesPoolCarReservationsService(@Authenticated Retrofit retrofit) {
+        return retrofit.create(PoolCarReservationsService.class);
+    }
+
+    @Provides
+    VehiclesService providesVehicleService(@Authenticated Retrofit retrofit) {
+        return retrofit.create(VehiclesService.class);
     }
 }

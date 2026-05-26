@@ -7,37 +7,42 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:layout_margin="20dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="20dp"
+        android:fillViewport="true">
 
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2">
+
             <TextView
                 android:id="@+id/tvTravelOrders"
                 android:layout_width="wrap_content"
-                android:layout_columnWeight="1"
                 android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
                 android:drawablePadding="4dp"
                 android:gravity="center"
                 android:text="@string/label_travelOrders"
                 app:drawableTint="@color/primary"
-                app:drawableTopCompat="@drawable/icon_menu_calendar"/>
+                app:drawableTopCompat="@drawable/icon_menu_calendar" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvEmployees"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_columnWeight="1"-->
-<!--                android:drawablePadding="4dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/label_employees"-->
-<!--                app:drawableTint="@color/primary"-->
-<!--                app:drawableTopCompat="@drawable/icon_menu_employees"/>-->
+            <!--
+            <TextView
+                android:id="@+id/tvEmployees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="@string/label_employees"
+                app:drawableTint="@color/primary"
+                app:drawableTopCompat="@drawable/icon_menu_employees" />
+            -->
 
-            <!--<TextView
+            <!--
+            <TextView
                 android:id="@+id/tvAppointments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +51,7 @@
                 android:gravity="center"
                 android:text="@string/label_appointments"
                 app:drawableTint="@color/primary"
-                app:drawableTopCompat="@drawable/icon_menu_calendar"/>
+                app:drawableTopCompat="@drawable/icon_menu_calendar" />
 
             <TextView
                 android:id="@+id/tvMemberships"
@@ -57,7 +62,7 @@
                 android:gravity="center"
                 android:text="@string/label_memberships"
                 app:drawableTint="@color/primary"
-                app:drawableTopCompat="@drawable/icon_menu_membership_card"/>
+                app:drawableTopCompat="@drawable/icon_menu_membership_card" />
 
             <TextView
                 android:id="@+id/tvSettings"
@@ -68,7 +73,8 @@
                 android:gravity="center"
                 android:text="@string/label_settings"
                 app:drawableTint="@color/primary"
-                app:drawableTopCompat="@drawable/icon_menu_preferences"/>-->
+                app:drawableTopCompat="@drawable/icon_menu_preferences" />
+            -->
 
             <TextView
                 android:id="@+id/tvLogout"
@@ -79,7 +85,7 @@
                 android:gravity="center"
                 android:text="@string/label_logout"
                 app:drawableTint="@color/primary"
-                app:drawableTopCompat="@drawable/icon_menu_logout"/>
+                app:drawableTopCompat="@drawable/icon_menu_logout" />
 
             <TextView
                 android:id="@+id/tvScanPackages"
@@ -90,7 +96,21 @@
                 android:gravity="center"
                 android:text="@string/label_ScanPackages"
                 app:drawableTint="@color/primary"
-                app:drawableTopCompat="@drawable/icon_menu_scan"/>
+                app:drawableTopCompat="@drawable/icon_menu_scan" />
+
+            <TextView
+                android:id="@+id/tvPoolCars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="@string/label_PoolCar"
+                app:drawableTint="@color/primary"
+                app:drawableTopCompat="@drawable/icon_menu_calendarpoolcar" />
+
         </GridLayout>
+
     </ScrollView>
+
 </LinearLayout>

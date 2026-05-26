@@ -89,6 +89,8 @@
     <string name="label_menu">Menu</string>
     <string name="label_membershipCard">Card</string>
     <string name="label_validFrom">Valid from</string>
+    <string name="label_dateFrom">Date from</string>
+    <string name="label_dateTo">Date to</string>
     <string name="label_validTo">Valid to</string>
     <string name="label_purchaseDate">Purchase date</string>
     <string name="label_daysValid">Days valid</string>
@@ -126,4 +128,6 @@
     <string name="label_scheduled">Scheduled</string>
     <string name="label_logout">Logout</string>
     <string name="label_ScanPackages">Scan packages</string>
+    <string name="label_PoolCar">Pool car</string>
+    <string name="notifications">Notifications</string>
 </resources>

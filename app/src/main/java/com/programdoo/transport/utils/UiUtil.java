@@ -43,9 +43,12 @@ import com.programdoo.transport.ui.views.ProgramInputField;
 import com.programdoo.transport.ui.views.SelectDialog;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
 public class UiUtil {
@@ -187,6 +190,58 @@ public class UiUtil {
             LocalTime selectedTime = LocalTime.of(hour, minute);
             pif.setText(TimeUtil.format(selectedTime));
         });
+    }
+
+    public static void dateTimePickerSetup(BaseFragment frag, ProgramInputField pif) {
+
+        pif.getEt().setInputType(InputType.TYPE_NULL);
+        pif.getEt().setShowSoftInputOnFocus(false);
+
+        final LocalDate[] selectedDate = new LocalDate[1];
+
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder
+                .datePicker()
+                .setTitleText("Select date")
+                .build();
+
+        MaterialTimePicker timePicker = new MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setTitleText("Select time")
+                .build();
+
+        pif.getEt().setOnClickListener(v ->
+                datePicker.show(frag.getParentFragmentManager(), "DATE")
+        );
+
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+
+            selectedDate[0] = Instant.ofEpochMilli(selection)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+            timePicker.show(frag.getParentFragmentManager(), "TIME");
+        });
+
+        timePicker.addOnPositiveButtonClickListener(dialog -> {
+
+            if (selectedDate[0] == null) {
+                selectedDate[0] = LocalDate.now();
+            }
+
+            LocalTime time = LocalTime.of(
+                    timePicker.getHour(),
+                    timePicker.getMinute()
+            );
+
+            LocalDateTime result = LocalDateTime.of(selectedDate[0], time);
+
+            // 🔥 FIX: koristi datetime formatter, ne DateUtil.format()
+            pif.setText(formatDateTime(result));
+        });
+    }
+    public static String formatDateTime(LocalDateTime dt) {
+        if (dt == null) return "";
+        return dt.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
     }
 
     public static void applySystemBarInsets(
