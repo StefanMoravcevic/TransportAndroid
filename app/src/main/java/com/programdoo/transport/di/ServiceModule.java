@@ -4,6 +4,7 @@ import com.programdoo.transport.data.services.AccountsService;
 import com.programdoo.transport.data.services.AppointmentsService;
 import com.programdoo.transport.data.services.AuthService;
 import com.programdoo.transport.data.services.CompaniesService;
+import com.programdoo.transport.data.services.EmployeeNotificationsService;
 import com.programdoo.transport.data.services.EmployeesService;
 import com.programdoo.transport.data.services.MasterDataService;
 import com.programdoo.transport.data.services.MembershipCardsService;
@@ -85,5 +86,10 @@ public class ServiceModule {
     @Provides
     VehiclesService providesVehicleService(@Authenticated Retrofit retrofit) {
         return retrofit.create(VehiclesService.class);
+    }
+
+    @Provides
+    EmployeeNotificationsService providesEmployeeNotificationsService(@Authenticated Retrofit retrofit) {
+        return retrofit.create(EmployeeNotificationsService.class);
     }
 }

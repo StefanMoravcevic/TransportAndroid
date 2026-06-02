@@ -60,16 +60,18 @@
                 android:textColor="@android:color/darker_gray" />
         </LinearLayout>
 
-        <!-- DAYS LEFT BADGE -->
-        <TextView
-            android:id="@+id/tvDaysLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2d"
-            android:padding="8dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:background="@drawable/bg_badge_red" />
+        <ImageView
+            android:id="@+id/ivMarkRead"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_check"
+            android:clickable="true"
+            android:focusable="true"
+            app:contentDescription="Mark as read"
+            android:padding="4dp"
+            app:tint="@color/primary"
+            android:background="@drawable/bg_circle_light"
+            android:layout_marginStart="10dp"/>
 
     </LinearLayout>
 

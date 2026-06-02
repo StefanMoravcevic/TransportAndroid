@@ -131,4 +131,7 @@
     <string name="label_dateFrom">Datum od</string>
     <string name="label_dateTo">Datum do</string>
     <string name="notifications">Obaveštenja</string>
+    <string name="label_markAllAsRead">Označi sve kao pročitane</string>
+    <string name="label_chargedVehicles">Zadužena vozila</string>
+
 </resources>

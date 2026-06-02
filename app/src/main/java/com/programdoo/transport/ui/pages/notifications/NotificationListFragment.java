@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.programdoo.transport.data.models.dtos.employeesNotifications.EmployeeNotificationDto;
 import com.programdoo.transport.databinding.FragmentNotificationsBinding;
 import com.programdoo.transport.ui.adapters.NotificationsAdapter;
 import com.programdoo.transport.ui.pages.BaseFragment;
@@ -41,11 +44,20 @@ public class NotificationListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        RecyclerView.ItemAnimator animator = new DefaultItemAnimator();
+        animator.setRemoveDuration(200);
+        animator.setAddDuration(200);
+        binding.recyclerView.setItemAnimator(animator);
+
         // 1. ViewModel
         viewModel = new ViewModelProvider(this).get(ExpiringDocumentsViewModel.class);
 
         // 2. Adapter
         adapter = new NotificationsAdapter();
+        int employeeId = viewModel.getLoggedEmployeeId();
+        adapter.setListener(notificationId -> {
+            viewModel.markNotificationAsRead(notificationId,employeeId);
+        });
 
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(requireContext())
@@ -53,13 +65,35 @@ public class NotificationListFragment extends BaseFragment {
 
         binding.recyclerView.setAdapter(adapter);
 
-        // 3. Load podataka
-        int employeeId = viewModel.getLoggedEmployeeId();
+
+
         viewModel.loadExpiringDocuments(employeeId);
+        viewModel.loadExpiringNotificationDocuments(employeeId);
+
+        binding.btnMarkAllRead.setOnClickListener(v -> {
+            viewModel.markAllNotificationsAsRead(employeeId);
+        });
 
         // 4. Observe
-        viewModel.getExpiringDocuments().observe(getViewLifecycleOwner(), list -> {
+        viewModel.getExpiringDocumentsNotifications().observe(getViewLifecycleOwner(), list -> {
             adapter.setData(list);
+            int count = 0;
+
+            if (list != null) {
+                for (EmployeeNotificationDto dto : list) {
+                    if (!dto.isRead()) {
+                        count++;
+                    }
+                }
+            }
+
+            viewModel.setUnreadCount(count);
         });
     }
-}
+
+
+
+
+    }
+
+

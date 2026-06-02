@@ -1,6 +1,7 @@
 package com.programdoo.transport.ui.pages.notifications;
 
 import com.programdoo.transport.data.models.dtos.employees.EmployeeDocumentAlertDto;
+import com.programdoo.transport.data.models.dtos.employeesNotifications.EmployeeNotificationDto;
 
 public class NotificationListItem {
 
@@ -9,7 +10,7 @@ public class NotificationListItem {
 
     public int viewType;
     public String header;
-    public EmployeeDocumentAlertDto notification;
+    public EmployeeNotificationDto notification;
 
     public static NotificationListItem header(String text) {
         NotificationListItem item = new NotificationListItem();
@@ -18,7 +19,7 @@ public class NotificationListItem {
         return item;
     }
 
-    public static NotificationListItem notification(EmployeeDocumentAlertDto dto) {
+    public static NotificationListItem notification(EmployeeNotificationDto dto) {
         NotificationListItem item = new NotificationListItem();
         item.viewType = TYPE_NOTIFICATION;
         item.notification = dto;
