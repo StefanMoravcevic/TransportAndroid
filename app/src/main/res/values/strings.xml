@@ -20,7 +20,7 @@
     <string name="label_username">Username</string>
     <string name="label_password">Password</string>
     <string name="label_trainees">Trainees</string>
-    <string name="label_travelOrders">Putni nalozi</string>
+    <string name="label_travelOrders">Travel orders</string>
     <string name="label_employees">Employees</string>
     <string name="label_add_trainee">New trainee</string>
     <string name="label_add_activity">New activity</string>
@@ -129,5 +129,8 @@
     <string name="label_logout">Logout</string>
     <string name="label_ScanPackages">Scan packages</string>
     <string name="label_PoolCar">Pool car</string>
+    <string name="label_chargedVehicles">Charged vehicles</string>
     <string name="notifications">Notifications</string>
+    <string name="label_markAllAsRead">Mark all as read</string>
+
 </resources>
