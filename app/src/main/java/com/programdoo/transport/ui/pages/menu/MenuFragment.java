@@ -21,6 +21,7 @@ import com.programdoo.transport.ui.pages.login.LoginActivity;
 import com.programdoo.transport.ui.pages.memberships.MembershipActivity;
 import com.programdoo.transport.ui.pages.notifications.NotificationActivity;
 import com.programdoo.transport.ui.pages.poolCarReservations.PoolCarReservationsActivity;
+import com.programdoo.transport.ui.pages.poolCarReservations.PoolCarReservationsListActivity;
 import com.programdoo.transport.ui.pages.scannedpackages.ScannedPackageActivity;
 import com.programdoo.transport.ui.pages.settings.SettingsActivity;
 import com.programdoo.transport.ui.pages.trainees.TraineesActivity;
@@ -36,6 +37,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class MenuFragment extends BaseFragment {
     FragmentMenuBinding binding;
 
+    private ToolbarAction notificationAction;
     private ExpiringDocumentsViewModel expiringViewModel;
     MenuViewModel viewModel;
 
@@ -65,52 +67,40 @@ public class MenuFragment extends BaseFragment {
     public void onViewCreated(
             @NonNull View view,
             @Nullable Bundle savedStateInstance) {
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_menu));
+
         ((BaseActivity) requireActivity())
-                .setToolbarActions(
-                        Collections.singletonList(
-                                new ToolbarAction(
-                                        1001,
-                                        R.drawable.icon_notification,
-                                        R.string.notifications,
-                                        MenuItem.SHOW_AS_ACTION_ALWAYS,
-                                        R.color.primary,
-                                        item -> {
-                                            Intent intent = new Intent(requireActivity(),
-                                                    NotificationActivity.class);
-                                            startActivity(intent);
-                                            return true;
-                                        }
-                                )
-                        )
-                );
-        expiringViewModel = new ViewModelProvider(this).get(ExpiringDocumentsViewModel.class);
+                .setToolbarTitle(getString(R.string.label_menu));
+
+        expiringViewModel = new ViewModelProvider(this)
+                .get(ExpiringDocumentsViewModel.class);
 
         int employeeId = expiringViewModel.getLoggedEmployeeId();
-        expiringViewModel.loadExpiringDocuments(employeeId);
+        expiringViewModel.loadExpiringNotificationDocuments(employeeId);
 
-       /* binding.tvTrainees.setOnClickListener(v -> {
-            *//* intent se koristi kad se prelazi iz jednog activity-ja u drugi.
-             * prvi argument je instanca trenutnog activity-ja, drugi je klasa ciljnog activity-ja.
-             * moguce je postaviti podatke u intent ako je potrebno preneti ih iz jednog u drugi
-             * activity pomocu intent.putExtra() i intent.putExtras() *//*
-            Intent intent = new Intent(requireActivity(), TraineesActivity.class);
-            startActivity(intent);
-        });
-        binding.tvAppointments.setOnClickListener(v -> {
-            Intent intent = new Intent(requireActivity(), AppointmentsActivity.class);
-            startActivity(intent);
-        });
+        notificationAction = new ToolbarAction(
+                R.id.action_notifications,
+                R.drawable.icon_notification,
+                R.string.notifications,
+                MenuItem.SHOW_AS_ACTION_ALWAYS,
+                R.color.primary,
+                item -> {
+                    Intent intent = new Intent(requireActivity(), NotificationActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+        );
 
-        binding.tvMemberships.setOnClickListener(v -> {
-            Intent intent = new Intent(requireActivity(), MembershipActivity.class);
-            startActivity(intent);
-        });
+        ((BaseActivity) requireActivity())
+                .setToolbarActions(Collections.singletonList(notificationAction));
 
-        binding.tvSettings.setOnClickListener(v -> {
-            Intent intent = new Intent(requireActivity(), SettingsActivity.class);
-            startActivity(intent);
-        });*/
+        expiringViewModel.getUnreadCount()
+                .observe(getViewLifecycleOwner(), count -> {
+
+                    int unread = count != null ? count : 0;
+
+                    ((BaseActivity) requireActivity())
+                            .setNotificationCount(unread);
+                });
 
         binding.tvLogout.setOnClickListener(v -> {
             Intent i = new Intent(requireActivity(), LoginActivity.class);
@@ -128,5 +118,19 @@ public class MenuFragment extends BaseFragment {
             Intent intent = new Intent(requireActivity(), PoolCarReservationsActivity.class);
             startActivity(intent);
         });
+
+        binding.tvChargedVehicles.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), PoolCarReservationsListActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        int employeeId = expiringViewModel.getLoggedEmployeeId();
+        expiringViewModel.loadExpiringNotificationDocuments(employeeId);
     }
 }
+

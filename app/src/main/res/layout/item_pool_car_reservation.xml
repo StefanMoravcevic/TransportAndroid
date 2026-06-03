@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    style="@style/ListItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="@dimen/edgePad">
+
+    <!-- LEFT COLUMN (Driver + Vehicle) -->
+    <TextView
+        android:id="@+id/tvDriver"
+        style="@style/ProgramTextView.Regular"
+        app:drawableStartCompat="@drawable/icon_trainer_medium"
+        app:drawableTint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvFrom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvVehicle"
+        style="@style/ProgramTextView.Regular"
+        app:drawableStartCompat="@drawable/icon_vehicle_small"
+        app:drawableTint="@color/black"
+        android:paddingHorizontal="@dimen/listItemSmallTextPad"
+
+        android:singleLine="false"
+        android:maxLines="2"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDriver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvFrom"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <!-- RIGHT COLUMN (From + To) -->
+    <TextView
+        android:id="@+id/tvFrom"
+        style="@style/ProgramTextView.Regular"
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvDriver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvTo"
+        style="@style/ProgramTextView.Regular"
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFrom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvVehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

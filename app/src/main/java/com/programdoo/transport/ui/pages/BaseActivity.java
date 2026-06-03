@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -33,8 +34,12 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class BaseActivity extends AppCompatActivity {
+
+    private int lastUnreadCount = 0;
     private ActivityBaseBinding binding;
     private BaseViewModel viewModel;
+
+    private TextView notificationBadge;
     private List<ToolbarAction> actions = new ArrayList<>();
 
     @Override
@@ -88,12 +93,14 @@ public class BaseActivity extends AppCompatActivity {
                 menu.clear();
 
                 for (ToolbarAction action : actions) {
+
                     MenuItem item = menu.add(
                             Menu.NONE,
                             action.id,
                             Menu.NONE,
                             getString(action.titleRes)
                     );
+
                     Drawable icon = ContextCompat.getDrawable(
                             BaseActivity.this,
                             action.iconRes
@@ -106,13 +113,32 @@ public class BaseActivity extends AppCompatActivity {
 
                     item.setShowAsAction(action.showAsAction);
 
-                    if (!action.usesActionView()) {
-                        item.setIcon(icon);
+                    if (action.id == R.id.action_notifications) {
+
+                        item.setActionView(R.layout.toolbar_notification_action);
+                        View actionView = item.getActionView();
+
+                        ImageButton button = actionView.findViewById(R.id.actionIcon);
+                        TextView badge = actionView.findViewById(R.id.badge);
+
+                        button.setImageDrawable(icon);
+
+                        button.setOnClickListener(v -> {
+                            if (action.handler != null) {
+                                action.handler.onClick(item);
+                            }
+                        });
+
+                        badge.setVisibility(View.GONE);
+
+                        notificationBadge = badge;
+
                         continue;
                     }
 
                     item.setActionView(R.layout.toolbar_action_view);
                     View actionView = item.getActionView();
+
                     ImageButton button = actionView.findViewById(R.id.actionIcon);
 
                     button.setImageDrawable(icon);
@@ -121,6 +147,7 @@ public class BaseActivity extends AppCompatActivity {
                     if (action.onClickHint != null) {
                         button.setOnClickListener(v -> action.onClickHint.run());
                     }
+
                     if (action.onLongClick != null) {
                         button.setOnLongClickListener(v -> {
                             action.onLongClick.run();
@@ -128,6 +155,7 @@ public class BaseActivity extends AppCompatActivity {
                         });
                     }
                 }
+                restoreNotificationBadge();
             }
 
             @Override
@@ -141,6 +169,32 @@ public class BaseActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void setNotificationCount(int count) {
+
+        lastUnreadCount = count;
+
+        if (notificationBadge == null) return;
+
+        if (count > 0) {
+            notificationBadge.setVisibility(View.VISIBLE);
+            notificationBadge.setText(String.valueOf(count));
+        } else {
+            notificationBadge.setVisibility(View.GONE);
+        }
+    }
+
+    private void restoreNotificationBadge() {
+
+        if (notificationBadge == null) return;
+
+        if (lastUnreadCount > 0) {
+            notificationBadge.setVisibility(View.VISIBLE);
+            notificationBadge.setText(String.valueOf(lastUnreadCount));
+        } else {
+            notificationBadge.setVisibility(View.GONE);
+        }
     }
 
     public void setToolbarTitle(String title) {
