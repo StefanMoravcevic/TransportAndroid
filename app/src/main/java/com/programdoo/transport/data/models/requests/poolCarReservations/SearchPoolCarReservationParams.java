@@ -5,6 +5,9 @@ import com.programdoo.transport.data.models.requests.ISearchParams;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import lombok.Data;
+
+@Data
 public class SearchPoolCarReservationParams implements ISearchParams {
 
     public Integer id;

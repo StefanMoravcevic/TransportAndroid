@@ -1,0 +1,52 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Body -->
+    <path
+        android:fillColor="#32c5f4"
+        android:pathData="M3,16
+                          C3,13.8 4.8,12 7,12
+                          H9
+                          L10.5,9.5
+                          C11,8.5 12,8 13.2,8
+                          H15.5
+                          C16.6,8 17.5,8.6 18,9.5
+                          L19.2,12
+                          C20.7,12.3 22,13.7 22,15.3
+                          V16
+                          C22,17.1 21.1,18 20,18
+                          H19
+                          C18.7,19.3 17.6,20.3 16.2,20.3
+                          C14.8,20.3 13.7,19.3 13.4,18
+                          H10.6
+                          C10.3,19.3 9.2,20.3 7.8,20.3
+                          C6.4,20.3 5.3,19.3 5,18
+                          H4
+                          C3.4,18 3,17.6 3,17
+                          V16Z"/>
+
+    <!-- Windows (glass area) -->
+    <path
+        android:fillColor="#B3E5FC"
+        android:pathData="M8.5,12
+                          L10,10
+                          C10.3,9.4 11,9 12,9
+                          H14.8
+                          C15.6,9 16.2,9.3 16.6,10
+                          L17.8,12
+                          H8.5Z"/>
+
+    <!-- Wheels -->
+    <path
+        android:fillColor="#222222"
+        android:pathData="M7.8,18.2
+                          a1.4,1.4 0 1,0 0.01,0"/>
+
+    <path
+        android:fillColor="#222222"
+        android:pathData="M16.2,18.2
+                          a1.4,1.4 0 1,0 0.01,0"/>
+</vector>

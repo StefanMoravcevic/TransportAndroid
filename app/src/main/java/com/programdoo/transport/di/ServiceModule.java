@@ -13,6 +13,7 @@ import com.programdoo.transport.data.services.PoolCarReservationsService;
 import com.programdoo.transport.data.services.PromotionsService;
 import com.programdoo.transport.data.services.ScannedPackagesService;
 import com.programdoo.transport.data.services.TraineesService;
+import com.programdoo.transport.data.services.VehicleEngagementsService;
 import com.programdoo.transport.data.services.VehiclesService;
 
 import javax.inject.Singleton;
@@ -91,5 +92,10 @@ public class ServiceModule {
     @Provides
     EmployeeNotificationsService providesEmployeeNotificationsService(@Authenticated Retrofit retrofit) {
         return retrofit.create(EmployeeNotificationsService.class);
+    }
+
+    @Provides
+    VehicleEngagementsService providesVehicleEngagementsService(@Authenticated Retrofit retrofit) {
+        return retrofit.create(VehicleEngagementsService.class);
     }
 }

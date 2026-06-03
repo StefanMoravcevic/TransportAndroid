@@ -54,7 +54,7 @@ public class ExpiringDocumentsViewModel extends BaseViewModel {
     }
 
     public void setUnreadCount(int count) {
-        unreadCount.setValue(count); // ili postValue ako si u background thread-u
+        unreadCount.setValue(count);
     }
 
     @Inject
