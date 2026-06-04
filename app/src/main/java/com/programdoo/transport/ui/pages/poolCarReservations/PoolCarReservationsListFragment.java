@@ -18,6 +18,7 @@ import com.programdoo.transport.data.models.requests.vehicleEngagements.SearchVe
 import com.programdoo.transport.databinding.FragmentMembershipsListBinding;
 import com.programdoo.transport.databinding.FragmentPoolCarReservationListBinding;
 import com.programdoo.transport.ui.adapters.appointments.PoolCarCalendarAdapter;
+import com.programdoo.transport.ui.pages.BaseActivity;
 import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.viewmodels.memberships.MembershipsViewModel;
 import com.programdoo.transport.ui.viewmodels.poolCarReservations.PoolCarReservationListViewModel;
@@ -57,6 +58,13 @@ public class PoolCarReservationsListFragment extends BaseFragment {
         binding = FragmentPoolCarReservationListBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
+    }
+    private void setupToolbar() {
+        ((BaseActivity) requireActivity())
+                .setToolbarTitle("Charged vehicles");
+
+        ((BaseActivity) requireActivity()).clearToolbarSubtitle();
+        ((BaseActivity) requireActivity()).clearToolbarActions();
     }
 
     @Override

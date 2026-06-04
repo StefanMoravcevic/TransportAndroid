@@ -10,47 +10,65 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class SaveTravelOrderRequestModel {
+public class SaveTravelOrderRequestModel implements  Serializable{
     @SerializedName("id")
-    protected int id;
-    @SerializedName("EmployeeId")
-    public int EmployeeId;
-    @SerializedName("VehicleId")
-    public int VehicleId;
-    @SerializedName("SupplementId")
-    public int SupplementId;
-    @SerializedName("EngagementId")
-    public int EngagementId;
-    @SerializedName("TravelOrderStatusId")
-    public int TravelOrderStatusId;
-    @SerializedName("Date")
-    public LocalDateTime Date;
-    @SerializedName("TransportationVehicleId")
-    public int TransportationVehicleId;
-    @SerializedName("OrgUnitId")
-    public int OrgUnitId;
-    @SerializedName("StateId")
-    public int StateId;
-    @SerializedName("ReturnDate")
-    public LocalDateTime ReturnDate;
-    @SerializedName("BorderCrossingFromDate")
-    public LocalDateTime BorderCrossingFromDate;
-    @SerializedName("BorderCrossingToDate")
-    public LocalDateTime BorderCrossingToDate;
-    @SerializedName("TravelGoal")
-    public String TravelGoal;
-    @SerializedName("Destination")
-    public String Destination;
-    @SerializedName("DailyAllowance")
-    public Float DailyAllowance;
-    @SerializedName("TravelOrderNumber")
-    public String TravelOrderNumber;
-    @SerializedName("DateForFormat")
-    public String DateForFormat;
-    @SerializedName("ReturnDateForFormat")
-    public String ReturnDateForFormat;
-    @SerializedName("BorderCrossingToDateForFormat")
-    public String BorderCrossingToDateForFormat;
-    @SerializedName("BorderCrossingToDateForFormat")
-    public String BorderCrossingFromDateForFormat;
+    protected Integer id;
+    @SerializedName("employeeId")
+    public Integer employeeId;
+    @SerializedName("vehicleId")
+    public Integer vehicleId;
+    @SerializedName("supplementId")
+    public Integer supplementId;
+    @SerializedName("engagementId")
+    public Integer engagementId;
+    @SerializedName("travelOrderStatusId")
+    public Integer travelOrderStatusId;
+    @SerializedName("date")
+    public LocalDateTime date;
+    @SerializedName("transportationVehicleId")
+    public Integer transportationVehicleId;
+    @SerializedName("orgUnitId")
+    public Integer orgUnitId;
+    @SerializedName("stateId")
+    public Integer stateId;
+    @SerializedName("returnDate")
+    public LocalDateTime returnDate;
+    @SerializedName("borderCrossingFromDate")
+    public LocalDateTime borderCrossingFromDate;
+    @SerializedName("borderCrossingToDate")
+    public LocalDateTime borderCrossingToDate;
+    @SerializedName("travelGoal")
+    public String travelGoal;
+    @SerializedName("destination")
+    public String destination;
+    @SerializedName("dailyAllowance")
+    public Double dailyAllowance;
+    @SerializedName("travelOrderNumber")
+    public String travelOrderNumber;
+    @SerializedName("dateForFormat")
+    public String dateForFormat;
+    @SerializedName("returnDateForFormat")
+    public String returnDateForFormat;
+    @SerializedName("borderCrossingToDateForFormat")
+    public String borderCrossingToDateForFormat;
+    @SerializedName("borderCrossingFromDateForFormat")
+    public String borderCrossingFromDateForFormat;
+    @SerializedName("payedCosts")
+    public boolean payedCosts;
+    @SerializedName("payDailyAllowance")
+    public boolean payDailyAllowance;
+    @SerializedName("exchangeRate")
+    public Double exchangeRate;
+    @SerializedName("calculationDate")
+    public LocalDateTime calculationDate;
+    @SerializedName("createdDate")
+    public LocalDateTime createdDate;
+    @SerializedName("dateCalculated")
+    public LocalDateTime dateCalculated;
+    @SerializedName("isApproved")
+    public boolean isApproved;
+    @SerializedName("approvedBy")
+    public Integer approvedBy;
+    @SerializedName("calculatedBy")
+    public Integer calculatedBy;
 }

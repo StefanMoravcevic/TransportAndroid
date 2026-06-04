@@ -1,0 +1,60 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/edgePad">
+
+    <LinearLayout
+        android:id="@+id/infoColumn"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivDocuments"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tvDriver"
+            app:drawableStartCompat="@drawable/icon_trainer_medium"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvState"
+            app:drawableStartCompat="@drawable/icon_earth_small"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvFrom"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvTo"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivDocuments"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/icon_camera_small"
+        android:padding="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="Documents"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,8 +30,7 @@
                     android:drawablePadding="4dp"
                     android:gravity="center"
                     android:text="@string/label_travelOrders"
-                    app:drawableTint="@color/primary"
-                    app:drawableTopCompat="@drawable/icon_menu_calendar" />
+                    app:drawableTopCompat="@drawable/icon_menu_document" />
 
                 <TextView
                     android:id="@+id/tvLogout"

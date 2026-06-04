@@ -87,6 +87,7 @@ public class CreatePoolCarReservationFragment extends BaseFragment {
         UiUtil.dateTimePickerSetup(this, binding.validTo);
     }
 
+
     private void readArguments() {
         if (getArguments() != null) {
             employeeId = getArguments().getLong("employeeId", -1);
