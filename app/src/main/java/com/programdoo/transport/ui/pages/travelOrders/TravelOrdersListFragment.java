@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,9 +22,8 @@ import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.adapters.TravelOrderRecyclerListAdapter;
 import com.programdoo.transport.ui.viewmodels.documents.DocumentsViewModel;
 import com.programdoo.transport.ui.viewmodels.travelOrders.TravelOrdersListViewModel;
+import com.programdoo.transport.utils.CameraHelper;
 import com.programdoo.transport.utils.Constants;
-
-import java.io.File;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -37,14 +34,13 @@ public class TravelOrdersListFragment extends BaseFragment {
 
     private FragmentTravelOrdersListBinding binding;
     private TravelOrdersListViewModel viewModel;
-
     private DocumentsViewModel documentsViewModel;
+
+
     private TravelOrderRecyclerListAdapter adapter;
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
-    private CompositeDisposable disposables = new CompositeDisposable();
-
-    private ActivityResultLauncher<Uri> takePictureLauncher;
-    private Uri imageUri;
+    private CameraHelper cameraHelper;
 
     private TravelOrderDto selectedItem;
 
@@ -61,8 +57,8 @@ public class TravelOrdersListFragment extends BaseFragment {
 
         viewModel = new ViewModelProvider(this).get(TravelOrdersListViewModel.class);
         documentsViewModel = new ViewModelProvider(this).get(DocumentsViewModel.class);
-        binding = FragmentTravelOrdersListBinding.inflate(inflater, container, false);
 
+        binding = FragmentTravelOrdersListBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -73,6 +69,7 @@ public class TravelOrdersListFragment extends BaseFragment {
         setupToolbar();
         setupRecyclerView();
         observeData();
+        observeUpload();
         loadData();
 
         binding.rvTravelOrders.addItemDecoration(
@@ -80,46 +77,14 @@ public class TravelOrdersListFragment extends BaseFragment {
         );
 
         initCamera();
-
-        documentsViewModel.getUploadResult()
-                .observe(getViewLifecycleOwner(), result -> {
-
-                    if (result != null) {
-
-                        Toast.makeText(requireContext(),
-                                "Upload successful",
-                                Toast.LENGTH_SHORT).show();
-
-                        Log.d("UPLOAD", "SUCCESS ID: " + result);
-
-                        loadData();
-                    }
-                });
-
-        documentsViewModel.getUploadError()
-                .observe(getViewLifecycleOwner(), error -> {
-
-                    if (error != null) {
-
-                        Toast.makeText(requireContext(),
-                                "Upload failed: " + error,
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
     }
 
-    // =========================
-    // TOOLBAR
-    // =========================
     private void setupToolbar() {
         ((BaseActivity) requireActivity()).setToolbarTitle("Travel orders");
         ((BaseActivity) requireActivity()).clearToolbarSubtitle();
         ((BaseActivity) requireActivity()).clearToolbarActions();
     }
 
-    // =========================
-    // RECYCLER + ADAPTER
-    // =========================
     private void setupRecyclerView() {
 
         adapter = new TravelOrderRecyclerListAdapter();
@@ -130,15 +95,76 @@ public class TravelOrdersListFragment extends BaseFragment {
 
         binding.rvTravelOrders.setAdapter(adapter);
 
-        // 🔥 CAMERA CLICK FROM ITEM
         adapter.setOnCameraClickListener(item -> {
-            openCamera(item);
+            selectedItem = item;
+            cameraHelper.openCamera(requireContext(), "travel_order");
         });
     }
 
-    // =========================
-    // LOAD DATA
-    // =========================
+    private void initCamera() {
+
+        cameraHelper = new CameraHelper();
+
+        cameraHelper.init(this, uri -> {
+
+            if (selectedItem != null) {
+
+                documentsViewModel.uploadDocument(
+                        uri,
+                        selectedItem,
+                        viewModel.getSession().getUserId(),
+                        requireContext()
+                );
+            }
+        });
+    }
+
+    @SuppressLint("AutoDispose")
+    private void observeData() {
+
+        disposables.add(
+                viewModel.getTravelOrders()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(response -> {
+
+                                    if (response == null || response.getPayload() == null) {
+                                        adapter.submitList(null);
+                                        return;
+                                    }
+
+                                    adapter.submitList(response.getPayload());
+
+                                }, throwable ->
+                                        Log.e("TRAVEL_DEBUG", "STREAM ERROR", throwable)
+                        )
+        );
+    }
+
+    private void observeUpload() {
+
+        documentsViewModel.getUploadResult()
+                .observe(getViewLifecycleOwner(), result -> {
+
+                    if (result != null) {
+                        Toast.makeText(requireContext(),
+                                "Upload successful ✔",
+                                Toast.LENGTH_SHORT).show();
+
+                        loadData();
+                    }
+                });
+
+        documentsViewModel.getUploadError()
+                .observe(getViewLifecycleOwner(), error -> {
+
+                    if (error != null) {
+                        Toast.makeText(requireContext(),
+                                "Upload failed: " + error,
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
     private void loadData() {
 
         int employeeId = viewModel.getSession().getEntityId();
@@ -149,84 +175,6 @@ public class TravelOrdersListFragment extends BaseFragment {
         viewModel.searchTravelOrders(params);
     }
 
-    // =========================
-    // OBSERVE
-    // =========================
-    @SuppressLint("AutoDispose")
-    private void observeData() {
-
-        disposables.add(
-                viewModel.getTravelOrders()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(response -> {
-
-                            if (response == null || response.getPayload() == null) {
-                                adapter.submitList(null);
-                                return;
-                            }
-
-                            adapter.submitList(response.getPayload());
-
-                        }, throwable -> {
-                            Log.e("TRAVEL_DEBUG", "STREAM ERROR", throwable);
-                        })
-        );
-    }
-
-    // =========================
-    // CAMERA INIT
-    // =========================
-    private void initCamera() {
-
-        takePictureLauncher =
-                registerForActivityResult(new ActivityResultContracts.TakePicture(), success -> {
-
-                    if (success && imageUri != null) {
-
-                        if (selectedItem != null) {
-
-                            documentsViewModel.uploadDocument(
-                                    imageUri,
-                                    selectedItem,
-                                    viewModel.getSession().getUserId(),
-                                    requireContext()
-                            );
-                        }
-                    }
-                });
-    }
-
-    // =========================
-    // OPEN CAMERA
-    // =========================
-    private void openCamera(TravelOrderDto item) {
-
-        selectedItem = item;
-
-        imageUri = createImageUri();
-        takePictureLauncher.launch(imageUri);
-    }
-
-    // =========================
-    // URI CREATION
-    // =========================
-    private Uri createImageUri() {
-
-        File file = new File(
-                requireContext().getCacheDir(),
-                "camera_" + System.currentTimeMillis() + ".jpg"
-        );
-
-        return androidx.core.content.FileProvider.getUriForFile(
-                requireContext(),
-                requireContext().getPackageName() + ".fileprovider",
-                file
-        );
-    }
-
-    // =========================
-    // CLEANUP
-    // =========================
     @Override
     public void onDestroyView() {
         super.onDestroyView();
