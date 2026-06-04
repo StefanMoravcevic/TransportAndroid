@@ -36,6 +36,7 @@ public class TravelOrdersListFragment extends BaseFragment {
     private TravelOrdersListViewModel viewModel;
     private DocumentsViewModel documentsViewModel;
 
+
     private TravelOrderRecyclerListAdapter adapter;
     private final CompositeDisposable disposables = new CompositeDisposable();
 
