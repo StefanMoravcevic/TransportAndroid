@@ -62,7 +62,6 @@ public class EditTraineeBasicInfoFragment extends BaseFragment {
         binding.sTrialPeriod.setOnCheckedChangeListener((b, isChecked) -> {
             if (isChecked) {
                 viewModel.setTrialForm(true);
-                binding.buttonPrimary.setText(getString(R.string.label_save_trial_trainee));
             }
             else {
                 viewModel.setTrialForm(false);
@@ -90,16 +89,9 @@ public class EditTraineeBasicInfoFragment extends BaseFragment {
                 viewModel.setTrialForm(true);
                 binding.sTrialPeriod.setChecked(true);
                 binding.sTrialPeriod.setClickable(false);
-                ((BaseActivity) requireActivity()).setToolbarSubtitle(getString(R.string.label_add_trial_trainee));
             }
         }
 
-        if (viewModel.isEditMode())
-            ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_edit_trainee));
-        else
-            ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_newTrainee));
-
-        binding.stepTabLayout.getTabAt(stepNumber).select();
 
         viewModel.getPromotionsRepository().searchPromotions(new SearchPromotionsParams());
 

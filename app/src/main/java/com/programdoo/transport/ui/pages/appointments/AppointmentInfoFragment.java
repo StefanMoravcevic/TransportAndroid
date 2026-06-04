@@ -54,7 +54,6 @@ public class AppointmentInfoFragment extends BaseFragment {
             }
         }
 
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_appointment_info));
         ((BaseActivity) requireActivity()).clearToolbarActions();
 
         viewModel.getAppointment().observe(getViewLifecycleOwner(), appt -> {

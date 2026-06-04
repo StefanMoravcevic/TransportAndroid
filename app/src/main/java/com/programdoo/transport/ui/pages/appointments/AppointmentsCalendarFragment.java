@@ -68,7 +68,6 @@ public class AppointmentsCalendarFragment extends BaseFragment {
             @Nullable Bundle savedStateInstance) {
         super.onViewCreated(view, savedStateInstance);
 
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_appointments));
         ((BaseActivity) requireActivity()).clearToolbarSubtitle();
         ((BaseActivity) requireActivity()).clearToolbarActions();
         ((BaseActivity) requireActivity()).setToolbarActions(List.of(

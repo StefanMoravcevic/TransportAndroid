@@ -30,7 +30,6 @@
                         android:id="@+id/iiTrainee"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:itemLabel="@string/label_trainee"
                         app:defaultText="@string/label_unknown">
                     </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
 
@@ -44,7 +43,6 @@
                         android:id="@+id/iiTrainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:itemLabel="@string/label_trainer"
                         app:defaultText="@string/label_unknown">
                     </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
 
@@ -126,7 +124,6 @@
                             android:id="@+id/iiRecurrence"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:itemLabel="@string/label_recurrence"
                             app:defaultText="@string/label_unknown">
                         </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
 
@@ -160,8 +157,6 @@
                         android:id="@+id/iidMembershipExpirySessionsLeft"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:firstItemLabel="@string/label_membership_expiry_date"
-                        app:secondItemLabel="@string/label_available_sessions"
                         app:defaultText="@string/label_unknown">
                     </com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble>
                 </LinearLayout>

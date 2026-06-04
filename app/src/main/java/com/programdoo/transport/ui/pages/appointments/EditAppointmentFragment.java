@@ -133,7 +133,6 @@ public class EditAppointmentFragment extends BaseFragment {
         }
 
         if (viewModel.isEditMode()) {
-            ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_edit_appointment));
             binding.buttonRecurrence.setVisibility(View.GONE);
 
             ((BaseActivity) requireActivity()).setToolbarActions(List.of(
@@ -151,7 +150,6 @@ public class EditAppointmentFragment extends BaseFragment {
             ));
         }
         else {
-            ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_new_appointment));
             binding.buttonRecurrence.setVisibility(View.VISIBLE);
         }
 
@@ -211,7 +209,6 @@ public class EditAppointmentFragment extends BaseFragment {
         viewModel.getRecurrencePattern().observe(getViewLifecycleOwner(), data -> {
             if (viewModel.isEditMode()) {
                 viewModel.setByRecurrence(true);
-                ((BaseActivity) requireActivity()).setToolbarSubtitle(getString(R.string.label_recurrence));
                 binding.buttonRecurrence.setVisibility(View.GONE);
                 binding.recurrenceDateSpan.setFirstText(DateUtil.format(data.getDateFrom()));
                 binding.recurrenceDateSpan.setSecondText(DateUtil.format(data.getDateTo()));
@@ -225,7 +222,6 @@ public class EditAppointmentFragment extends BaseFragment {
                 (key, bundle) -> {
                     int newTraineeId = bundle.getInt(Constants.ARG_TRAINEE_ID);
                     viewModel.setTrialTraineeId(newTraineeId);
-                    ((BaseActivity) requireActivity()).setToolbarSubtitle(getString(R.string.label_trial_appointment));
                     binding.selTrainee.addPendingSelection(newTraineeId);
                     binding.selTrainee.setClickable(false);
                     binding.selTrainee.setFocusable(false);

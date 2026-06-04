@@ -56,7 +56,6 @@
         android:clickable="true"
         android:backgroundTint="?attr/colorPrimary"
         app:tint="?attr/colorOnPrimary"
-        android:contentDescription="@string/label_add_activity"
         android:src="@drawable/icon_list_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

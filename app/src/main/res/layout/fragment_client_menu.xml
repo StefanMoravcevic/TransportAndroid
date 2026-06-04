@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="4dp"
                 android:gravity="center"
-                android:text="@string/label_measurements"
                 app:drawableTint="@color/primary"
                 app:drawableTopCompat="@drawable/icon_menu_measurements"/>
 
@@ -33,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="4dp"
                 android:gravity="center"
-                android:text="@string/label_progress"
                 app:drawableTint="@color/primary"
                 app:drawableTopCompat="@drawable/icon_menu_progress"/>
 
@@ -44,7 +42,6 @@
                 android:layout_columnWeight="1"
                 android:drawablePadding="4dp"
                 android:gravity="center"
-                android:text="@string/label_appointments"
                 app:drawableTint="@color/primary"
                 app:drawableTopCompat="@drawable/icon_menu_calendar"/>
 
@@ -55,7 +52,6 @@
                 android:layout_columnWeight="1"
                 android:drawablePadding="4dp"
                 android:gravity="center"
-                android:text="@string/label_memberships"
                 app:drawableTint="@color/primary"
                 app:drawableTopCompat="@drawable/icon_menu_membership_card"/>
 

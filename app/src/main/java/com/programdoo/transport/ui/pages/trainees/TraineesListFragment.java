@@ -81,7 +81,6 @@ public class TraineesListFragment extends BaseFragment {
 
         binding.rvTrainees.addItemDecoration(new ListItemDecoration(getContext(), getContext().getColor(R.color.primaryLighter), 1));
 
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.title_traineesList));
         ((BaseActivity) requireActivity()).clearToolbarSubtitle();
 
         ((BaseActivity) requireActivity()).setToolbarActions(List.of(

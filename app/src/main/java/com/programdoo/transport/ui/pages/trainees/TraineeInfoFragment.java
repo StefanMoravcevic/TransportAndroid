@@ -55,7 +55,6 @@ public class TraineeInfoFragment extends BaseFragment {
             }
         }
 
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_trainee_info));
         ((BaseActivity) requireActivity()).clearToolbarActions();
 
         viewModel.getTrainee().observe(getViewLifecycleOwner(), data -> {

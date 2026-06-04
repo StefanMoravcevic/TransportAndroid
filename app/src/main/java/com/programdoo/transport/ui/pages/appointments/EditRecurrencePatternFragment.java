@@ -45,7 +45,6 @@ public class EditRecurrencePatternFragment extends BaseFragment {
     public void onViewCreated(
             @NonNull View view,
             @Nullable Bundle savedStateInstance) {
-        ((BaseActivity) requireActivity()).setToolbarSubtitle(getString(R.string.label_recurrence));
         weekdaysAdapter = new EnumRecyclerViewAdapter(requireContext(), Arrays.asList(Weekdays.values()));
         UiUtil.multiSelectSetup(
                 getContext(),
