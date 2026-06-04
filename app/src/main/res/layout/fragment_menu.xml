@@ -75,6 +75,17 @@
                     android:text="@string/label_chargedVehicles"
                     app:drawableTopCompat="@drawable/icon_menu_vehicle_front" />
 
+                <TextView
+                    android:id="@+id/tvSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:drawablePadding="4dp"
+                    android:gravity="center"
+                    android:text="@string/label_settings"
+                    app:drawableTint="@color/primary"
+                    app:drawableTopCompat="@drawable/icon_menu_preferences"/>
+
             </GridLayout>
 
         </ScrollView>
