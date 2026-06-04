@@ -67,6 +67,20 @@
             android:name="com.programdoo.transport.ui.pages.poolCarReservations.PoolCarReservationsListActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name="com.programdoo.transport.ui.pages.travelOrders.TravelOrdersActivity"
+            android:exported="false">
+        </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.programdoo.transport.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

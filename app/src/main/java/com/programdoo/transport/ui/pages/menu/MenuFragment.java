@@ -25,6 +25,7 @@ import com.programdoo.transport.ui.pages.poolCarReservations.PoolCarReservations
 import com.programdoo.transport.ui.pages.scannedpackages.ScannedPackageActivity;
 import com.programdoo.transport.ui.pages.settings.SettingsActivity;
 import com.programdoo.transport.ui.pages.trainees.TraineesActivity;
+import com.programdoo.transport.ui.pages.travelOrders.TravelOrdersActivity;
 import com.programdoo.transport.ui.viewmodels.employees.ExpiringDocumentsViewModel;
 import com.programdoo.transport.utils.Constants;
 import com.programdoo.transport.ui.viewmodels.MenuViewModel;
@@ -121,6 +122,11 @@ public class MenuFragment extends BaseFragment {
 
         binding.tvChargedVehicles.setOnClickListener(v -> {
             Intent intent = new Intent(requireActivity(), PoolCarReservationsListActivity.class);
+            startActivity(intent);
+        });
+
+        binding.tvTravelOrders.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), TravelOrdersActivity.class);
             startActivity(intent);
         });
     }

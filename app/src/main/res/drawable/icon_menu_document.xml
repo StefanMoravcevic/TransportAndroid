@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:autoMirrored="true">
+
+    <!-- Document outline -->
+    <path
+        android:fillColor="@color/primary"
+        android:pathData="M6,2
+                          H14
+                          L18,6
+                          V22
+                          H6
+                          C4.9,22 4,21.1 4,20
+                          V4
+                          C4,2.9 4.9,2 6,2Z"/>
+
+    <!-- Folded corner -->
+    <path
+        android:fillColor="#222222"
+        android:pathData="M14,2
+                          V6
+                          H18Z"/>
+
+    <!-- White text lines -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M7,10 H17 V11.3 H7Z"/>
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M7,12.8 H16 V14.1 H7Z"/>
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M7,15.6 H17 V16.9 H7Z"/>
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M7,18.4 H15 V19.7 H7Z"/>
+
+</vector>

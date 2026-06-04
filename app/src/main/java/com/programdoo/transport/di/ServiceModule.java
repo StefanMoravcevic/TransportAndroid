@@ -4,6 +4,7 @@ import com.programdoo.transport.data.services.AccountsService;
 import com.programdoo.transport.data.services.AppointmentsService;
 import com.programdoo.transport.data.services.AuthService;
 import com.programdoo.transport.data.services.CompaniesService;
+import com.programdoo.transport.data.services.DocumentsService;
 import com.programdoo.transport.data.services.EmployeeNotificationsService;
 import com.programdoo.transport.data.services.EmployeesService;
 import com.programdoo.transport.data.services.MasterDataService;
@@ -13,6 +14,7 @@ import com.programdoo.transport.data.services.PoolCarReservationsService;
 import com.programdoo.transport.data.services.PromotionsService;
 import com.programdoo.transport.data.services.ScannedPackagesService;
 import com.programdoo.transport.data.services.TraineesService;
+import com.programdoo.transport.data.services.TravelOrdersService;
 import com.programdoo.transport.data.services.VehicleEngagementsService;
 import com.programdoo.transport.data.services.VehiclesService;
 
@@ -97,5 +99,15 @@ public class ServiceModule {
     @Provides
     VehicleEngagementsService providesVehicleEngagementsService(@Authenticated Retrofit retrofit) {
         return retrofit.create(VehicleEngagementsService.class);
+    }
+
+    @Provides
+    TravelOrdersService providesTravelOrdersService(@Authenticated Retrofit retrofit) {
+        return retrofit.create(TravelOrdersService.class);
+    }
+
+    @Provides
+    DocumentsService providesDocumentsService(@Authenticated Retrofit retrofit) {
+        return retrofit.create(DocumentsService.class);
     }
 }
