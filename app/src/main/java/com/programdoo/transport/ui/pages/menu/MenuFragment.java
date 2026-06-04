@@ -129,6 +129,11 @@ public class MenuFragment extends BaseFragment {
             Intent intent = new Intent(requireActivity(), TravelOrdersActivity.class);
             startActivity(intent);
         });
+
+        binding.tvSettings.setOnClickListener(v -> {
+            Intent i = new Intent(requireActivity(), SettingsActivity.class);
+            startActivity(i);
+        });
     }
 
     @Override
