@@ -76,7 +76,7 @@ public class MembershipsListFragment extends BaseFragment {
             }
         }
 
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_membership_list));
+
         ((BaseActivity) requireActivity()).clearToolbarSubtitle();
 
         binding.swipeRefresh.setOnRefreshListener(() -> viewModel.refreshData());

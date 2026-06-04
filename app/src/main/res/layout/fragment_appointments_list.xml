@@ -53,8 +53,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/cScheduled"
-                style="@style/Chip"
-                android:text="@string/label_scheduled" />
+                style="@style/Chip" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/cFinished"

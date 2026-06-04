@@ -97,8 +97,6 @@
                         android:id="@+id/iidMembershipExpirySessionsLeft"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:firstItemLabel="@string/label_membership_expiry_date"
-                        app:secondItemLabel="@string/label_sessions_left"
                         app:defaultText="@string/label_unknown">
                     </com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble>
 
@@ -112,8 +110,6 @@
                         android:id="@+id/iidTrialTrainerDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:firstItemLabel="@string/label_trial_trainer"
-                        app:secondItemLabel="@string/label_trial_date"
                         app:defaultText="@string/label_unknown">
                     </com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble>
 
@@ -127,7 +123,6 @@
                         android:id="@+id/iiNextSessionDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:itemLabel="@string/label_next_session_date"
                         app:defaultText="@string/label_unknown">
                     </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
                 </LinearLayout>
@@ -145,7 +140,6 @@
                     style="@style/ProgramButton.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_memberships"
                     android:layout_marginRight="4dp"
                     app:icon="@drawable/icon_membership_card"
                     android:layout_weight="4"/>
@@ -172,7 +166,6 @@
                     style="@style/ProgramButton.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_measurements"
                     android:layout_marginRight="4dp"
                     app:icon="@drawable/icon_measurements"
                     android:layout_weight="4"/>
@@ -200,7 +193,6 @@
                     style="@style/ProgramButton.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_activities"
                     android:layout_marginRight="4dp"
                     app:icon="@drawable/icon_activity"
                     android:layout_weight="4"/>

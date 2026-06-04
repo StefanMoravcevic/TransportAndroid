@@ -58,7 +58,6 @@ public class EditMembershipFragment extends BaseFragment {
             @NonNull View view,
             Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_membership_info));
 
         membershipCardAdapter = new MembershipCardsRecyclerViewAdapter(requireContext(), new ArrayList<>());
         traineeAdapter = new TraineesRecyclerViewAdapter(requireContext(), new ArrayList<>());

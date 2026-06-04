@@ -76,8 +76,6 @@
                         android:id="@+id/idMembershipInfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:firstItemLabel="@string/label_membership_name"
-                        app:secondItemLabel="@string/label_membership_type"
                         app:defaultText="@string/label_unknown">
                     </com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble>
 
@@ -91,8 +89,6 @@
                         android:id="@+id/idValidFrom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:firstItemLabel="@string/label_membership_date_from"
-                        app:secondItemLabel="@string/label_membership_date_to"
                         app:defaultText="@string/label_unknown">
                     </com.programdoo.transport.ui.views.ProgramCardViewInfoItemDouble>
 
@@ -106,7 +102,6 @@
                         android:id="@+id/idNumberOfAppointments"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:itemLabel="@string/label_numberOfAppointments"
                         app:defaultText="@string/label_unknown">
                     </com.programdoo.transport.ui.views.ProgramCardViewInfoItem>
                 </LinearLayout>

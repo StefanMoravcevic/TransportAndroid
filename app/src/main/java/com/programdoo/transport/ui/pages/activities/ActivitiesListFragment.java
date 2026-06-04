@@ -92,13 +92,7 @@ public class ActivitiesListFragment extends BaseFragment {
         }
         var traineeName = getArguments().getString(Constants.ARG_TRAINEE_NAME, "");
         viewModel.getTraineesRepository().searchActivities(params);
-        if (params.traineeId != null && params.traineeId > 0){
-            ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.title_activitiesList));
-            ((BaseActivity) requireActivity()).setToolbarSubtitle(traineeName);
-        }
-        else {
-            ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.title_activitiesList));
-        }
+        
         /* postavi akciju na item click u adapteru (to jest, u listi) */
         adapter.setOnClickListener((v, position, activity) -> {
             Bundle bundle = new Bundle();

@@ -38,7 +38,6 @@
                     android:id="@+id/selTrainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_trainer"
                     android:layout_weight="1"
                     android:paddingStart="2dp">
                 </com.programdoo.transport.ui.views.SelectDialog>
@@ -47,8 +46,7 @@
             <com.programdoo.transport.ui.views.SelectDialog
                 android:id="@+id/selTrainee"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_trainee">
+                android:layout_height="wrap_content">
             </com.programdoo.transport.ui.views.SelectDialog>
 
             <com.programdoo.transport.ui.views.ProgramInputField
@@ -208,7 +206,6 @@
         <Button
             android:id="@+id/buttonTrialTrainee"
             style="@style/ProgramButton.Secondary"
-            android:text="@string/label_add_trial_trainee"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/buttonCancel"

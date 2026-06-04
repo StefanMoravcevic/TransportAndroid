@@ -44,7 +44,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginEnd="4dp"
-                        android:hint="@string/label_membershipCard" />
+                        />
 
                     <com.programdoo.transport.ui.views.SelectDialog
                         android:id="@+id/selTrainees"
@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="4dp"
-                        android:hint="@string/label_trainee" />
+                         />
                 </LinearLayout>
 
                 <!-- Purchase Date i Price -->
@@ -69,7 +69,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginEnd="4dp"
-                        android:hint="@string/label_purchaseDate"
                         android:inputType="date"
                         android:imeOptions="actionNext" />
 
@@ -118,7 +117,6 @@
                     android:id="@+id/numberOfAppointments"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_numberOfAppointments"
                     android:imeOptions="actionNext"
                     android:inputType="number" />
 
@@ -135,8 +133,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginEnd="4dp"
-                        android:hint="@string/label_paymentMethod" />
+                        android:layout_marginEnd="4dp" />
 
                     <com.programdoo.transport.ui.views.ProgramInputField
                         android:id="@+id/paymentDate"
@@ -144,7 +141,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="4dp"
-                        android:hint="@string/label_paymentDate"
                         android:inputType="date"
                         android:imeOptions="actionNext" />
                 </LinearLayout>

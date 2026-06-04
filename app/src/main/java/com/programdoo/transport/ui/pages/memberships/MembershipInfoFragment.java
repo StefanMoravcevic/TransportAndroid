@@ -55,7 +55,6 @@ public class MembershipInfoFragment extends BaseFragment {
 //        } else if (getActivity() instanceof MembershipActivity) {
 //            ((MembershipActivity) getActivity()).setToolbarTitle(getString(R.string.label_membership_info));
 //        }
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_membership_info));
 
         viewModel.getMembership().observe(getViewLifecycleOwner(), data -> {
             ((BaseActivity) requireActivity()).setToolbarSubtitle(data.getTraineeName());

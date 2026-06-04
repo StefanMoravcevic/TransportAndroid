@@ -67,7 +67,6 @@ public class AppointmentsListFragment extends BaseFragment {
 
         binding.rvAppointments.addItemDecoration(new ListItemDecoration(getContext(), getContext().getColor(R.color.primaryLighter), 1));
 
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_appointments));
         ((BaseActivity) requireActivity()).setToolbarSubtitle(viewModel.getSession().getUser().getFullName());
 
         binding.swipeLayout.setOnRefreshListener(() -> viewModel.refreshData());

@@ -34,8 +34,7 @@
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_fitness_info" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.tabs.TabLayout>
 
         <ScrollView
@@ -92,8 +91,7 @@
                 <com.programdoo.transport.ui.views.SelectDialog
                     android:id="@+id/selPromotion"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_promotion">
+                    android:layout_height="wrap_content">
                 </com.programdoo.transport.ui.views.SelectDialog>
 
                 <LinearLayout
@@ -106,8 +104,7 @@
                         android:id="@+id/sTrialPeriod"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:text="@string/label_trial_period"/>
+                        android:checked="false" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
