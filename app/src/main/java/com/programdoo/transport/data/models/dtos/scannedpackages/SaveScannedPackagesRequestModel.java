@@ -15,6 +15,8 @@ public class SaveScannedPackagesRequestModel implements Serializable {
     public String packageNo;
     @SerializedName("userId")
     public int userId;
+    @SerializedName("confirmed")
+    public boolean confirmed;
     @SerializedName("scannedDateTime")
     public LocalDateTime scannedDateTime;
     @SerializedName("longitude")

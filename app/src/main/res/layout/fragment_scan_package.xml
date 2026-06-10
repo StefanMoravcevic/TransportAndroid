@@ -15,15 +15,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="12dp"
+            android:paddingBottom="1dp"
             android:text="Skenirajte paket"
             android:textSize="20sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/txtGpsStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
+            android:paddingBottom="1dp"
             android:text="Učitavanje lokacije..."
             android:textColor="#FF9800"
             android:textStyle="bold" />
@@ -31,7 +32,7 @@
         <EditText
             android:id="@+id/etScanInput"
             android:layout_width="match_parent"
-            android:layout_height="122dp"
+            android:layout_height="72dp"
             android:background="@drawable/bg_scan_input"
             android:hint="Skenirajte bar kod paketa"
             android:imeOptions="actionDone"
@@ -39,7 +40,11 @@
             android:padding="14dp"
             android:singleLine="true"
             android:textSize="18sp" />
-
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerPackages"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <ImageView

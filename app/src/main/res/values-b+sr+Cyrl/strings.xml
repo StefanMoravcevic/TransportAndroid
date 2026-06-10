@@ -67,7 +67,7 @@
     <string name="label_delete">Обриши</string>
     <string name="msg_long_press_delete">Држите дуже за брисање!</string>
     <string name="label_of_total">од</string>
-    <string name="label_inactive">Неактивнп</string>
+    <string name="label_inactive">Неактивно</string>
     <string name="msg_not_implemented">Функционалност још није имплементирана!</string>
     <string name="label_logout">Излогуј се</string>
     <string name="label_ScanPackages">Скенирање пакета</string>
@@ -77,24 +77,5 @@
     <string name="notifications">Обавештења</string>
     <string name="label_markAllAsRead">Означи све као прочитане</string>
     <string name="label_chargedVehicles">Задужена возила</string>
-    <string name="label_createPoolCarReservation">Креирајте резервацију</string>
-    <string name="label_driver">Возач</string>
-    <string name="label_vehicle">Возило</string>
-    <string name="label_travel_order_number">Број путног налога</string>
-    <string name="label_state">Држава</string>
-    <string name="label_transportation_vehicle">Превозно средство</string>
-    <string name="label_departure_date">Датум поласка</string>
-    <string name="label_return_date">Датум повратка</string>
-    <string name="label_borderCrossingFromDate">Прелазак границе одлазак</string>
-    <string name="label_borderCrossingToDate">Преласка границе долазак</string>
-    <string name="label_place">Место</string>
-    <string name="label_travelGoal">Циљ путовања</string>
-    <string name="label_foreign_expenses_paid">Плаћени трошкови у иностранству</string>
-    <string name="label_status">Статус</string>
-    <string name="label_succesfullySaved">Успешно сачувано</string>
-    <string name="label_createTravelOrder">Креирајте путни налог</string>
-    <string name="label_notifications">Обавештења</string>
-    <string name="label_create_driver_vehicle_issue">Унос нерегуларности на возилу</string>
-    <string name="label_issues">Унос нерегуларности</string>
-    <string name="label_defect_type">Врста</string>
+    <string name="label_confirm">Потврди</string>
 </resources>

@@ -86,11 +86,6 @@ public class AppointmentsRecyclerViewAdapter
             itemView.setOnLongClickListener(this);
 
             this.tvDate = itemView.findViewById(R.id.tvDate);
-            this.tvStartTime = itemView.findViewById(R.id.tvStartTime);
-            this.tvEndTime = itemView.findViewById(R.id.tvEndTime);
-            this.tvOrgUnitName = itemView.findViewById(R.id.tvOrgUnitName);
-            this.tvTrainer = itemView.findViewById(R.id.tvTrainer);
-            this.tvStatus = itemView.findViewById(R.id.tvStatus);
         }
     }
 }

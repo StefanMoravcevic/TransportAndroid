@@ -6,6 +6,7 @@
     <string name="label_nickname">Nickname</string>
     <string name="label_phoneNumber">Phone number</string>
     <string name="label_save">Save</string>
+    <string name="label_confirm">Confirm</string>
     <string name="msg_requiredFields">Fill in the required fields!</string>
     <string name="msg_saved">Save successful!</string>
     <string name="msg_required">Required</string>

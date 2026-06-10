@@ -1,8 +1,11 @@
 package com.programdoo.transport.ui.pages.scannedpackages;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 
 import com.programdoo.transport.R;
+import com.programdoo.transport.ui.adapters.ScannedPackagesRecyclerViewAdapter;
 import com.programdoo.transport.ui.pages.BaseActivity;
 import com.programdoo.transport.utils.NavigationUtil;
 
@@ -18,4 +21,5 @@ public class ScannedPackageActivity extends BaseActivity {
 
         NavigationUtil.navigate(this, R.id.fragmentFrame, new ScanPackageFragment(), null);
     }
-}
+
+ }
