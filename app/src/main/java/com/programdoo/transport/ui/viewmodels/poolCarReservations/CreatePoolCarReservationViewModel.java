@@ -144,7 +144,7 @@ public class CreatePoolCarReservationViewModel extends BaseViewModel {
                 poolCarReservationRepository.savePoolCarReservations(model),
                 () -> {
                     toastEvent.setValue(1);
-                    saveResultSubject.onNext(true); // 🔥 OVO DODAJEŠ
+                    saveResultSubject.onNext(true);
                 },
                 throwable -> {
                     toastEvent.setValue(2);

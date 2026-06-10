@@ -26,4 +26,11 @@ public class DocumentsRepository {
     ) {
         return service.uploadDocument(file, data);
     }
+    public Observable<ResponseModel<String>> getNewNumber(
+            int documentSerieTypeId,
+            int orgUnitId
+    ) {
+        return service.getNewNumber(documentSerieTypeId, orgUnitId);
+    }
+
 }

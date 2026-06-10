@@ -1,63 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root"
-    style="@style/ListItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="@dimen/edgePad">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/primaryLighter">
 
-    <!-- LEFT COLUMN (Driver + Vehicle) -->
-    <TextView
-        android:id="@+id/tvDriver"
-        style="@style/ProgramTextView.Regular"
-        app:drawableStartCompat="@drawable/icon_trainer_medium"
-        app:drawableTint="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvFrom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
 
-    <TextView
-        android:id="@+id/tvVehicle"
-        style="@style/ProgramTextView.Regular"
-        app:drawableStartCompat="@drawable/icon_vehicle_small"
-        app:drawableTint="@color/black"
-        android:paddingHorizontal="@dimen/listItemSmallTextPad"
+        <TextView
+            android:id="@+id/tvDriver"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:drawablePadding="4dp"
+            app:drawableStartCompat="@drawable/icon_trainer_medium"
+            app:drawableTint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvFrom"/>
 
-        android:singleLine="false"
-        android:maxLines="2"
+        <TextView
+            android:id="@+id/tvVehicle"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:drawablePadding="4dp"
+            android:paddingStart="2dp"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:drawableStartCompat="@drawable/icon_vehicle_small"
+            app:drawableTint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDriver"
+            app:layout_constraintEnd_toStartOf="@id/tvFrom"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDriver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvFrom"
+        <TextView
+            android:id="@+id/tvFrom"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tvTo"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:gravity="end"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFrom"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <!-- RIGHT COLUMN (From + To) -->
-    <TextView
-        android:id="@+id/tvFrom"
-        style="@style/ProgramTextView.Regular"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvDriver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/tvTo"
-        style="@style/ProgramTextView.Regular"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvFrom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvVehicle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

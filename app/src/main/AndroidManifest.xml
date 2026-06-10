@@ -71,6 +71,10 @@
             android:name="com.programdoo.transport.ui.pages.travelOrders.TravelOrdersActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name="com.programdoo.transport.ui.pages.driverVehicleIssues.DriverVehicleIssueActivity"
+            android:exported="false">
+        </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.programdoo.transport.fileprovider"

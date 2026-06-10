@@ -25,6 +25,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import lombok.Getter;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -37,6 +38,7 @@ public class DocumentsViewModel extends BaseViewModel {
     private final MutableLiveData<Boolean> uploadLoading = new MutableLiveData<>();
     private final MutableLiveData<Integer> uploadResult = new MutableLiveData<>();
     private final MutableLiveData<String> uploadError = new MutableLiveData<>();
+
 
     @Inject
     public DocumentsViewModel(
@@ -65,7 +67,8 @@ public class DocumentsViewModel extends BaseViewModel {
             Uri uri,
             TravelOrderDto item,
             int userId,
-            Context context
+            Context context,
+            int documentTypeId
     ) {
 
         uploadLoading.setValue(true);
@@ -106,7 +109,7 @@ public class DocumentsViewModel extends BaseViewModel {
             model.setReferenceId(item.getId());
             model.setUserId(userId);
             model.setFileName(file.getName());
-            model.setDocumentTypeId(1025);
+            model.setDocumentTypeId(documentTypeId);
             model.setSourceId(1);
             model.setRelativeFilePath("test");
 
@@ -137,4 +140,5 @@ public class DocumentsViewModel extends BaseViewModel {
             uploadError.setValue(e.getMessage());
         }
     }
+
 }

@@ -17,6 +17,6 @@ public interface TravelOrdersService {
     @POST("travelOrders/search")
     Observable<ResponseModelList<TravelOrderDto>> searchTravelOrders(@Body SearchTravelOrdersParams searchParams);
 
-    @POST("travelOrders")
+    @POST("travelOrders/saveForAndroid")
     Observable<ResponseModel<Integer>> saveTravelOrder(@Body SaveTravelOrderRequestModel requestModel);
 }

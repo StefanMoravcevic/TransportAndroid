@@ -61,7 +61,7 @@ public class PoolCarReservationsListFragment extends BaseFragment {
     }
     private void setupToolbar() {
         ((BaseActivity) requireActivity())
-                .setToolbarTitle("Charged vehicles");
+                .setToolbarTitle(getString(R.string.label_chargedVehicles));
 
         ((BaseActivity) requireActivity()).clearToolbarSubtitle();
         ((BaseActivity) requireActivity()).clearToolbarActions();
@@ -70,7 +70,7 @@ public class PoolCarReservationsListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        setupToolbar();
         setupRecyclerView();
         observeData();
         setupChips();
@@ -99,6 +99,7 @@ public class PoolCarReservationsListFragment extends BaseFragment {
             }
         });
     }
+
 
     private void loadPoolCar() {
 

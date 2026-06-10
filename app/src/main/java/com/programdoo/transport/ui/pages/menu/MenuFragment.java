@@ -17,6 +17,7 @@ import com.programdoo.transport.ui.adapters.ToolbarAction;
 import com.programdoo.transport.ui.pages.BaseActivity;
 import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.pages.appointments.AppointmentsActivity;
+import com.programdoo.transport.ui.pages.driverVehicleIssues.DriverVehicleIssueActivity;
 import com.programdoo.transport.ui.pages.login.LoginActivity;
 import com.programdoo.transport.ui.pages.memberships.MembershipActivity;
 import com.programdoo.transport.ui.pages.notifications.NotificationActivity;
@@ -132,6 +133,11 @@ public class MenuFragment extends BaseFragment {
 
         binding.tvSettings.setOnClickListener(v -> {
             Intent i = new Intent(requireActivity(), SettingsActivity.class);
+            startActivity(i);
+        });
+
+        binding.tvDriverVehicleIssue.setOnClickListener(v -> {
+            Intent i = new Intent(requireActivity(), DriverVehicleIssueActivity .class);
             startActivity(i);
         });
     }
