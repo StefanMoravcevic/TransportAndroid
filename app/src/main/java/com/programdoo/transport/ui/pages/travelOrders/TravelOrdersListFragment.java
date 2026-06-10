@@ -15,11 +15,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.programdoo.transport.R;
 import com.programdoo.transport.data.models.dtos.travelOrders.TravelOrderDto;
 import com.programdoo.transport.databinding.FragmentTravelOrdersListBinding;
 import com.programdoo.transport.ui.pages.BaseActivity;
 import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.adapters.TravelOrderRecyclerListAdapter;
+import com.programdoo.transport.ui.pages.poolCarReservations.CreatePoolCarReservationFragment;
 import com.programdoo.transport.ui.viewmodels.documents.DocumentsViewModel;
 import com.programdoo.transport.ui.viewmodels.travelOrders.TravelOrdersListViewModel;
 import com.programdoo.transport.utils.CameraHelper;
@@ -30,7 +32,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 @AndroidEntryPoint
-public class TravelOrdersListFragment extends BaseFragment {
+public class    TravelOrdersListFragment extends BaseFragment {
 
     private FragmentTravelOrdersListBinding binding;
     private TravelOrdersListViewModel viewModel;
@@ -76,11 +78,13 @@ public class TravelOrdersListFragment extends BaseFragment {
                 new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         );
 
+        binding.fabNewTravelOrder.setOnClickListener(v -> openCreateTravelOrder());
+
         initCamera();
     }
 
     private void setupToolbar() {
-        ((BaseActivity) requireActivity()).setToolbarTitle("Travel orders");
+        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_travelOrders));
         ((BaseActivity) requireActivity()).clearToolbarSubtitle();
         ((BaseActivity) requireActivity()).clearToolbarActions();
     }
@@ -113,7 +117,8 @@ public class TravelOrdersListFragment extends BaseFragment {
                         uri,
                         selectedItem,
                         viewModel.getSession().getUserId(),
-                        requireContext()
+                        requireContext(),
+                        1025
                 );
             }
         });
@@ -180,5 +185,27 @@ public class TravelOrdersListFragment extends BaseFragment {
         super.onDestroyView();
         disposables.clear();
         binding = null;
+    }
+
+    private void openCreateTravelOrder() {
+
+        CreateTravelOrderFragment fragment =
+                new CreateTravelOrderFragment();
+
+        Bundle args = new Bundle();
+
+        args.putLong(
+                "employeeId",
+                viewModel.getSession().getEntityId()
+        );
+
+        fragment.setArguments(args);
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentFrame, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.programdoo.transport.R;
 import com.programdoo.transport.data.models.dtos.employees.EmployeeDto;
 import com.programdoo.transport.data.models.dtos.poolCarReservations.PoolCarReservationDto;
 import com.programdoo.transport.data.models.dtos.poolCarReservations.SavePoolCarReservationRequestModel;
@@ -96,11 +97,11 @@ public class CreatePoolCarReservationFragment extends BaseFragment {
 
     private void setupUI() {
 
-        binding.btnCancel.setOnClickListener(v ->
+        binding.buttonCancel.setOnClickListener(v ->
                 requireActivity().getSupportFragmentManager().popBackStack()
         );
 
-        binding.btnSave.setOnClickListener(v -> saveReservation());
+        binding.buttonSave.setOnClickListener(v -> saveReservation());
     }
 
     // ---------------- LOAD ----------------
@@ -277,7 +278,7 @@ public class CreatePoolCarReservationFragment extends BaseFragment {
         req.dateFrom = LocalDateTime.parse(DateUtil.apiFormatNew(dateFrom));
         req.dateTo = LocalDateTime.parse(DateUtil.apiFormatNew(dateTo));
 
-        req.createdBy = 2;
+        req.createdBy = viewModel.getSession().getUserId();
         req.deletedBy = null;
         req.isDivorced = false;
         req.isDeleted = false;
@@ -286,7 +287,7 @@ public class CreatePoolCarReservationFragment extends BaseFragment {
     }
     private void setupToolbar() {
         ((BaseActivity) requireActivity())
-                .setToolbarTitle("Create reservation");
+                .setToolbarTitle(getString(R.string.label_createPoolCarReservation));
 
         ((BaseActivity) requireActivity()).clearToolbarSubtitle();
         ((BaseActivity) requireActivity()).clearToolbarActions();

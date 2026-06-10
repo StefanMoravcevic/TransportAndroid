@@ -77,5 +77,25 @@
     <string name="notifications">Obaveštenja</string>
     <string name="label_markAllAsRead">Označi sve kao pročitane</string>
     <string name="label_chargedVehicles">Zadužena vozila</string>
+    <string name="label_createPoolCarReservation">Krerajte rezervaciju</string>
+    <string name="label_driver">Vozač</string>
+    <string name="label_vehicle">Vozilo</string>
+    <string name="label_travel_order_number">Broj putnog naloga</string>
+    <string name="label_state">Država</string>
+    <string name="label_transportation_vehicle">Prevozno sredstvo</string>
+    <string name="label_departure_date">Datum polaska</string>
+    <string name="label_return_date">Datum povratka</string>
+    <string name="label_borderCrossingFromDate">Prelazak granice odlazak</string>
+    <string name="label_borderCrossingToDate">Prelazak granice dolazak</string>
+    <string name="label_place">Mesto</string>
+    <string name="label_travelGoal">Cilj putovanja</string>
+    <string name="label_foreign_expenses_paid">Plaćeni troškovi u inostranstvu</string>
+    <string name="label_status">Status</string>
+    <string name="label_succesfullySaved">Uspešno sačuvano</string>
+    <string name="label_createTravelOrder">Kreirajte putni nalog</string>
+    <string name="label_notifications">Obaveštenja</string>
+    <string name="label_create_driver_vehicle_issue">Unos neregularnosti na vozilu</string>
+    <string name="label_issues">Unos neregularnosti</string>
+    <string name="label_defect_type">Vrsta</string>
 
 </resources>

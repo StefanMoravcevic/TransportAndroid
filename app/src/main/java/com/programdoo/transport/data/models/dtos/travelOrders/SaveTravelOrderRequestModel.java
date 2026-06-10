@@ -17,6 +17,8 @@ public class SaveTravelOrderRequestModel implements  Serializable{
     public Integer employeeId;
     @SerializedName("vehicleId")
     public Integer vehicleId;
+    @SerializedName("userId")
+    public Integer userId;
     @SerializedName("supplementId")
     public Integer supplementId;
     @SerializedName("engagementId")

@@ -30,6 +30,7 @@
                     android:drawablePadding="4dp"
                     android:gravity="center"
                     android:text="@string/label_travelOrders"
+                    android:layout_margin="12dp"
                     app:drawableTopCompat="@drawable/icon_menu_document" />
 
                 <TextView
@@ -40,6 +41,7 @@
                     android:drawablePadding="4dp"
                     android:gravity="center"
                     android:text="@string/label_logout"
+                    android:layout_margin="12dp"
                     app:drawableTint="@color/primary"
                     app:drawableTopCompat="@drawable/icon_menu_logout" />
 
@@ -52,6 +54,7 @@
                     android:gravity="center"
                     android:text="@string/label_ScanPackages"
                     app:drawableTint="@color/primary"
+                    android:layout_margin="12dp"
                     app:drawableTopCompat="@drawable/icon_menu_scan" />
 
                 <TextView
@@ -63,6 +66,7 @@
                     android:gravity="center"
                     android:text="@string/label_PoolCar"
                     app:drawableTint="@color/primary"
+                    android:layout_margin="12dp"
                     app:drawableTopCompat="@drawable/icon_menu_calendarpoolcar" />
 
                 <TextView
@@ -73,7 +77,20 @@
                     android:drawablePadding="4dp"
                     android:gravity="center"
                     android:text="@string/label_chargedVehicles"
+                    android:layout_margin="12dp"
                     app:drawableTopCompat="@drawable/icon_menu_vehicle_front" />
+
+                <TextView
+                    android:id="@+id/tvDriverVehicleIssue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:drawablePadding="4dp"
+                    android:gravity="center"
+                    android:text="@string/label_issues"
+                    android:layout_margin="12dp"
+                    app:drawableTint="@color/primary"
+                    app:drawableTopCompat="@drawable/icon_menu_issues"/>
 
                 <TextView
                     android:id="@+id/tvSettings"
@@ -83,8 +100,11 @@
                     android:drawablePadding="4dp"
                     android:gravity="center"
                     android:text="@string/label_settings"
+                    android:layout_margin="12dp"
                     app:drawableTint="@color/primary"
                     app:drawableTopCompat="@drawable/icon_menu_preferences"/>
+
+
 
             </GridLayout>
 
