@@ -1,6 +1,12 @@
 package com.programdoo.transport.data.repositories;
 
+import com.programdoo.transport.data.eventbus.AuthEventBus;
+import com.programdoo.transport.data.models.dtos.promotions.PromotionDto;
 import com.programdoo.transport.data.models.dtos.scannedpackages.SaveScannedPackagesRequestModel;
+import com.programdoo.transport.data.models.dtos.scannedpackages.ScannedPackageDto;
+import com.programdoo.transport.data.models.requests.employees.SearchEmployeesParams;
+import com.programdoo.transport.data.models.requests.scannedPackages.SearchScannedPackagesParams;
+import com.programdoo.transport.data.services.EmployeesService;
 import com.programdoo.transport.data.services.ScannedPackagesService;
 
 import com.programdoo.transport.data.models.dtos.memberships.MembershipDto;
@@ -26,11 +32,22 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped;
 public class ScannedPackagesRepository {
 
     private final ScannedPackagesService service;
-
+    private final BehaviorSubject<SearchScannedPackagesParams> searchScannedPackagesRequests
+            = BehaviorSubject.create();
+    @Getter
+    private final Observable<ResponseModelList<ScannedPackageDto>> scannedPackages;
     @Inject
     public ScannedPackagesRepository(
-            ScannedPackagesService scannedPackagesService) {
-        this.service = scannedPackagesService;
+        ScannedPackagesService scannedPackagesService) {
+            this.service = scannedPackagesService;
+
+        scannedPackages = RepositoryOperators.createDataStream(
+                    searchScannedPackagesRequests, service::SearchScannedPackages);
+
+        //    expiringDocuments = RepositoryOperators.createDataStream(
+        //            expiringDocumentsRequests,
+        //            service::getEmployeeExpiringDocuments
+        //    );
     }
 
     public Completable saveScannedPackages(SaveScannedPackagesRequestModel saveData) {
@@ -40,4 +57,9 @@ public class ScannedPackagesRepository {
                     else return Completable.error(new RuntimeException(result.getMessage()));
                 });
     }
+    public void searchScannedPackages(SearchScannedPackagesParams searchParams) {
+        searchScannedPackagesRequests.onNext(searchParams);
+    }
+
+
 }

@@ -1,8 +1,12 @@
 package com.programdoo.transport.ui.pages.scannedpackages;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -25,22 +32,31 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.programdoo.transport.R;
 import com.programdoo.transport.data.models.dtos.scannedpackages.SaveScannedPackagesRequestModel;
+import com.programdoo.transport.data.models.requests.scannedPackages.SearchScannedPackagesParams;
+import com.programdoo.transport.ui.adapters.ScannedPackagesPagerAdapter;
 import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.viewmodels.scannedPackages.ScanPackageViewModel;
+import com.programdoo.transport.ui.viewmodels.scannedPackages.ScannedPackagesSharedViewModel;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class ScanPackageFragment extends BaseFragment {
 
-    private ScanPackageViewModel viewModel;
+    //private ScanPackageViewModel viewModel;
+    private ScannedPackagesSharedViewModel viewModel;
     private FusedLocationProviderClient fusedLocationClient;
-
+    private ViewPager2 viewPager;
     private ImageView success;
     private EditText input;
     private double currentLat = 0;
     private double currentLng = 0;
-
+    private final CompositeDisposable disposables = new CompositeDisposable();
     private TextView txtGpsStatus;
     private boolean locationLoaded = false;
 
@@ -61,13 +77,21 @@ public class ScanPackageFragment extends BaseFragment {
 
         input.requestFocus();
         txtGpsStatus = view.findViewById(R.id.txtGpsStatus);
-        input = view.findViewById(R.id.etScanInput);
+        //input = view.findViewById(R.id.etScanInput);
         input.setEnabled(false);
-        viewModel = new ViewModelProvider(this).get(ScanPackageViewModel.class);
+        //viewModel = new ViewModelProvider(this).get(ScanPackageViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ScannedPackagesSharedViewModel.class);
 
         fusedLocationClient =
                 LocationServices.getFusedLocationProviderClient(requireActivity());
-
+        viewPager = view.findViewById(R.id.viewPagerPackages);
+        viewModel.getPackageIdsLiveData().observe(getViewLifecycleOwner(), listaIdjeva -> {
+            if (listaIdjeva != null && !listaIdjeva.isEmpty()) {
+                // Kada stignu ID-jevi, tek tada pravimo i postavljamo adapter
+                ScannedPackagesPagerAdapter adapter = new ScannedPackagesPagerAdapter(this, listaIdjeva);
+                viewPager.setAdapter(adapter);
+            }
+        });
         setupEnter();
         observeEvents();
         startLocationUpdates();
@@ -103,7 +127,7 @@ public class ScanPackageFragment extends BaseFragment {
                 model.setLongitude(currentLng);
 
                 viewModel.saveScannedPackage(model);
-
+                loadPackageByNo(code);
                 input.setText("");
                 input.requestFocus();
 
@@ -206,6 +230,18 @@ public class ScanPackageFragment extends BaseFragment {
                 requireActivity().getMainLooper()
         );
     }
+    public void loadPackageByNo(String packageNo) {
+
+        SearchScannedPackagesParams params = new SearchScannedPackagesParams();
+        params.setPackageNo(packageNo);
+        viewModel.searchScannedPackages(params);
+        observeData();
+        int trenutniId = viewModel.getSelectedPackageId().getValue();
+        int prethodniId = trenutniId - 1;
+        List<Integer> ids = Arrays.asList(trenutniId, prethodniId);
+
+        viewModel.packageIdsLiveData.setValue(ids);
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -214,4 +250,25 @@ public class ScanPackageFragment extends BaseFragment {
             fusedLocationClient.removeLocationUpdates(locationCallback);
         }
     }
+    @SuppressLint("AutoDispose")
+    private void observeData() {
+
+        disposables.add(
+                viewModel.getScannedPackages()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(response -> {
+
+                                    if (response == null || response.getPayload() == null) {
+                                        //adapter.submitList(null);
+                                        return;
+                                    }
+
+                                    //adapter.submitList(response.getPayload());
+
+                                }, throwable ->
+                                        Log.e("TRAVEL_DEBUG", "STREAM ERROR", throwable)
+                        )
+        );
+    }
+
 }

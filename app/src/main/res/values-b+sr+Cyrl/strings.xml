@@ -67,7 +67,7 @@
     <string name="label_delete">Обриши</string>
     <string name="msg_long_press_delete">Држите дуже за брисање!</string>
     <string name="label_of_total">од</string>
-    <string name="label_inactive">Неактивнп</string>
+    <string name="label_inactive">Неактивно</string>
     <string name="msg_not_implemented">Функционалност још није имплементирана!</string>
     <string name="label_logout">Излогуј се</string>
     <string name="label_ScanPackages">Скенирање пакета</string>
@@ -77,5 +77,5 @@
     <string name="notifications">Обавештења</string>
     <string name="label_markAllAsRead">Означи све као прочитане</string>
     <string name="label_chargedVehicles">Задужена возила</string>
-
+    <string name="label_confirm">Потврди</string>
 </resources>

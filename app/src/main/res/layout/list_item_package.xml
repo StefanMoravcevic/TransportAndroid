@@ -10,9 +10,9 @@
     android:paddingVertical="@dimen/edgePad">
 
     <TextView
-        android:id="@+id/tvDate"
+        android:id="@+id/tvPackageNo"
         style="@style/ProgramTextView.Regular"
-        app:drawableStartCompat="@drawable/icon_date_range_medium"
+        app:drawableStartCompat="@drawable/outline_cases_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
