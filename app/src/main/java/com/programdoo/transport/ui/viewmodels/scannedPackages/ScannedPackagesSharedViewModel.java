@@ -68,6 +68,7 @@ public class ScannedPackagesSharedViewModel extends BaseViewModel {
     public LiveData<Integer> getSelectedPackageId() {
         return selectedPackageId;
     }
+
     public Observable<ResponseModelList<ScannedPackageDto>> getScannedPackages() {
         return repository.getScannedPackages();
     }
