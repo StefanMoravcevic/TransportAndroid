@@ -44,7 +44,6 @@ public class TravelOrdersRepository {
     }
 
     public void searchTravelOrders(SearchTravelOrdersParams searchParams) {
-        Log.d("TRAVEL_DEBUG", "SEND PARAMS: " + new Gson().toJson(searchParams));
         searchTravelOrdersParams.onNext(searchParams);
     }
 

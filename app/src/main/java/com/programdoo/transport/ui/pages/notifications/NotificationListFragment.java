@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.programdoo.transport.R;
 import com.programdoo.transport.data.models.dtos.employeesNotifications.EmployeeNotificationDto;
 import com.programdoo.transport.databinding.FragmentNotificationsBinding;
 import com.programdoo.transport.ui.adapters.NotificationsAdapter;
+import com.programdoo.transport.ui.pages.BaseActivity;
 import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.viewmodels.employees.ExpiringDocumentsViewModel;
 import com.programdoo.transport.utils.Constants;
@@ -48,7 +50,7 @@ public class NotificationListFragment extends BaseFragment {
         animator.setRemoveDuration(200);
         animator.setAddDuration(200);
         binding.recyclerView.setItemAnimator(animator);
-
+        setupToolbar();
         // 1. ViewModel
         viewModel = new ViewModelProvider(this).get(ExpiringDocumentsViewModel.class);
 
@@ -90,10 +92,13 @@ public class NotificationListFragment extends BaseFragment {
             viewModel.setUnreadCount(count);
         });
     }
+    private void setupToolbar() {
+        ((BaseActivity) requireActivity())
+                .setToolbarTitle(getString(R.string.label_notifications));
 
-
-
-
+        ((BaseActivity) requireActivity()).clearToolbarSubtitle();
+        ((BaseActivity) requireActivity()).clearToolbarActions();
     }
+}
 
 

@@ -87,7 +87,7 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
 
     private void setupToolbar() {
         ((BaseActivity) requireActivity())
-                .setToolbarTitle("Pool Car Calendar");
+                .setToolbarTitle(getString(R.string.label_PoolCar));
 
         ((BaseActivity) requireActivity()).clearToolbarSubtitle();
         ((BaseActivity) requireActivity()).clearToolbarActions();

@@ -41,6 +41,8 @@ public class Constants {
     public static final String FRAG_NOTIFICATIONS = "frag_notifications";
 
     public static final String FRAG_TRAVEL_ORDERS_LIST = "frag_travel_orders_list";
+    public static final String FRAG_TRAVEL_ORDER_CREATE = "frag_travel_order_create";
+    public static final String FRAG_DRIVER_VEHICLE_ISSUE_ADD = "frag_driver_vehicle_issue_add";
 
     // cross fragment messages
     public static final String MSG_TRAINEE_CREATED = "msg_traineeCreated";

@@ -78,5 +78,28 @@
     <string name="label_chargedVehicles">Charged vehicles</string>
     <string name="notifications">Notifications</string>
     <string name="label_markAllAsRead">Mark all as read</string>
+    <string name="label_createPoolCarReservation">Create pool car reservation</string>
+    <string name="label_driver">Driver</string>
+    <string name="label_vehicle">Vehicle</string>
+    <string name="label_travel_order_number">Travel order number</string>
+    <string name="label_state">State</string>
+    <string name="label_transportation_vehicle">Transportation vehicle</string>
+    <string name="label_departure_date">Departure date</string>
+    <string name="label_return_date">Return date</string>
+    <string name="label_borderCrossingFromDate">Border crossing from date</string>
+    <string name="label_borderCrossingToDate">Border crossing to date</string>
+    <string name="label_place">Place</string>
+    <string name="label_travelGoal">Travel goal</string>
+    <string name="label_foreign_expenses_paid">Foreign expenses paid</string>
+    <string name="label_status">Status</string>
+    <string name="label_succesfullySaved">Successfully saved</string>
+    <string name="label_createTravelOrder">Create travel order</string>
+    <string name="label_notifications">Notifications</string>
+    <string name="label_create_driver_vehicle_issue">Create driver vehicle issue</string>
+    <string name="label_issues">Vehicle issues</string>
+    <string name="label_defect_type">Defect type</string>
+
+
+
 
 </resources>
