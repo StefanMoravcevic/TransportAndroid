@@ -48,23 +48,23 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class ScanPackageFragment extends BaseFragment {
 
-    //private ScanPackageViewModel viewModel;
     private ScannedPackagesSharedViewModel viewModel;
     private FusedLocationProviderClient fusedLocationClient;
+
     private ViewPager2 viewPager;
     private ImageView success;
     private EditText input;
+    private TextView txtGpsStatus;
+
     private double currentLat = 0;
     private double currentLng = 0;
-    private final CompositeDisposable disposables = new CompositeDisposable();
-    private TextView txtGpsStatus;
-    private boolean locationLoaded = false;
+
+    private boolean isSaving = false;
+    private String lastScannedCode = null;
 
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
-    private boolean isSaving = false;
 
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
@@ -74,27 +74,30 @@ public class ScanPackageFragment extends BaseFragment {
 
         success = view.findViewById(R.id.imgSuccess);
         input = view.findViewById(R.id.etScanInput);
-
-        input.requestFocus();
         txtGpsStatus = view.findViewById(R.id.txtGpsStatus);
-        //input = view.findViewById(R.id.etScanInput);
+        viewPager = view.findViewById(R.id.viewPagerPackages);
+
         input.setEnabled(false);
-        //viewModel = new ViewModelProvider(this).get(ScanPackageViewModel.class);
+        input.requestFocus();
+
         viewModel = new ViewModelProvider(this).get(ScannedPackagesSharedViewModel.class);
 
         fusedLocationClient =
                 LocationServices.getFusedLocationProviderClient(requireActivity());
-        viewPager = view.findViewById(R.id.viewPagerPackages);
+
         viewModel.getPackageIdsLiveData().observe(getViewLifecycleOwner(), listaIdjeva -> {
             if (listaIdjeva != null && !listaIdjeva.isEmpty()) {
-                // Kada stignu ID-jevi, tek tada pravimo i postavljamo adapter
-                ScannedPackagesPagerAdapter adapter = new ScannedPackagesPagerAdapter(this, listaIdjeva);
+                ScannedPackagesPagerAdapter adapter =
+                        new ScannedPackagesPagerAdapter(this, listaIdjeva);
                 viewPager.setAdapter(adapter);
             }
         });
+
         setupEnter();
         observeEvents();
+        observeData();
         startLocationUpdates();
+
         return view;
     }
 
@@ -108,32 +111,25 @@ public class ScanPackageFragment extends BaseFragment {
 
                 String code = v.getText().toString().trim();
 
-                if (code.isEmpty()) {
-                    return true;
-                }
+                if (code.isEmpty()) return true;
 
                 isSaving = true;
+                lastScannedCode = code;
 
-                SaveScannedPackagesRequestModel model =
-                        new SaveScannedPackagesRequestModel();
-
+                SaveScannedPackagesRequestModel model = new SaveScannedPackagesRequestModel();
                 model.setPackageNo(code);
                 model.setUserId(viewModel.getLoggedUserId());
-                LocalDateTime now = LocalDateTime.now();
-                model.setScannedDateTime(now);
-
-                // koristi poslednju poznatu lokaciju (instant)
+                model.setScannedDateTime(LocalDateTime.now());
                 model.setLatitude(currentLat);
                 model.setLongitude(currentLng);
 
                 viewModel.saveScannedPackage(model);
-                loadPackageByNo(code);
+
                 input.setText("");
                 input.requestFocus();
 
                 return true;
             }
-
             return false;
         });
     }
@@ -141,7 +137,9 @@ public class ScanPackageFragment extends BaseFragment {
     private void observeEvents() {
 
         viewModel.getToastEvent().observe(getViewLifecycleOwner(), id -> {
+
             isSaving = false;
+
             if (id == 1) {
 
                 success.setVisibility(View.VISIBLE);
@@ -164,6 +162,10 @@ public class ScanPackageFragment extends BaseFragment {
                             })
                             .start();
                 }, 500);
+
+                if (lastScannedCode != null) {
+                    loadPackageByNo(lastScannedCode);
+                }
             }
 
             if (id == 2) {
@@ -172,9 +174,31 @@ public class ScanPackageFragment extends BaseFragment {
         });
     }
 
-    @Override
-    public String TAG() {
-        return "ScanPackageFragment";
+    @SuppressLint("AutoDispose")
+    private void observeData() {
+
+        viewModel.getScannedPackages()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                            if (response == null || response.getPayload() == null) return;
+
+
+                        }, throwable ->
+                                Log.e("TRAVEL_DEBUG", "STREAM ERROR", throwable)
+                );
+    }
+
+    private void loadPackageByNo(String packageNo) {
+
+        SearchScannedPackagesParams params = new SearchScannedPackagesParams();
+        params.setPackageNo(packageNo);
+
+        viewModel.searchScannedPackages(params);
+
+        //int trenutniId = viewModel.getSelectedPackageId().getValue();
+        // int prethodniId = trenutniId - 1; //
+        // List<Integer> ids = Arrays.asList(trenutniId, prethodniId);
+        // viewModel.packageIdsLiveData.setValue(ids);
     }
 
     private void startLocationUpdates() {
@@ -193,8 +217,7 @@ public class ScanPackageFragment extends BaseFragment {
         locationRequest = new LocationRequest.Builder(
                 Priority.PRIORITY_HIGH_ACCURACY,
                 5000
-        )
-                .setMinUpdateIntervalMillis(2000)
+        ).setMinUpdateIntervalMillis(2000)
                 .build();
 
         locationCallback = new LocationCallback() {
@@ -211,12 +234,8 @@ public class ScanPackageFragment extends BaseFragment {
                     currentLat = location.getLatitude();
                     currentLng = location.getLongitude();
 
-                    locationLoaded = true;
-
                     requireActivity().runOnUiThread(() -> {
-
                         txtGpsStatus.setVisibility(View.GONE);
-
                         input.setEnabled(true);
                         input.requestFocus();
                     });
@@ -230,18 +249,7 @@ public class ScanPackageFragment extends BaseFragment {
                 requireActivity().getMainLooper()
         );
     }
-    public void loadPackageByNo(String packageNo) {
 
-        SearchScannedPackagesParams params = new SearchScannedPackagesParams();
-        params.setPackageNo(packageNo);
-        viewModel.searchScannedPackages(params);
-        observeData();
-        int trenutniId = viewModel.getSelectedPackageId().getValue();
-        int prethodniId = trenutniId - 1;
-        List<Integer> ids = Arrays.asList(trenutniId, prethodniId);
-
-        viewModel.packageIdsLiveData.setValue(ids);
-    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -250,25 +258,9 @@ public class ScanPackageFragment extends BaseFragment {
             fusedLocationClient.removeLocationUpdates(locationCallback);
         }
     }
-    @SuppressLint("AutoDispose")
-    private void observeData() {
 
-        disposables.add(
-                viewModel.getScannedPackages()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(response -> {
-
-                                    if (response == null || response.getPayload() == null) {
-                                        //adapter.submitList(null);
-                                        return;
-                                    }
-
-                                    //adapter.submitList(response.getPayload());
-
-                                }, throwable ->
-                                        Log.e("TRAVEL_DEBUG", "STREAM ERROR", throwable)
-                        )
-        );
+    @Override
+    public String TAG() {
+        return "ScanPackageFragment";
     }
-
 }
