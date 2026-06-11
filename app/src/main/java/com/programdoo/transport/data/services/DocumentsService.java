@@ -1,6 +1,8 @@
 package com.programdoo.transport.data.services;
 
+import com.programdoo.transport.data.models.dtos.documents.DocumentDto;
 import com.programdoo.transport.data.models.responses.ResponseModel;
+import com.programdoo.transport.data.models.responses.ResponseModelList;
 
 import io.reactivex.rxjava3.core.Observable;
 import okhttp3.MultipartBody;
@@ -18,6 +20,12 @@ public interface DocumentsService {
     Observable<ResponseModel<Integer>> uploadDocument(
             @Part MultipartBody.Part file,
             @Part("data") RequestBody data
+    );
+
+    @GET("documents/list/{documentType}/{referenceId}")
+    Observable<ResponseModelList<DocumentDto>> getDocuments(
+            @Path("documentType") int documentType,
+            @Path("referenceId") int referenceId
     );
     @GET("documentSeries/getNewNumber/{documentSerieTypeId}/{orgUnitId}")
     Observable<ResponseModel<String>> getNewNumber(

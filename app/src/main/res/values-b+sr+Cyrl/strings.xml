@@ -98,4 +98,7 @@
     <string name="label_create_driver_vehicle_issue">Унос нерегуларности на возилу</string>
     <string name="label_issues">Унос нерегуларности</string>
     <string name="label_defect_type">Врста</string>
+    <string name="label_add_picture">Додај слику</string>
+    <string name="label_image">Слика</string>
+    <string name="label_succesfullyUploaded">Успешно закачен документ</string>
 </resources>

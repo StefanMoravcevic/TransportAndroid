@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.scopes.ActivityRetainedScoped;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import lombok.Getter;
@@ -45,11 +46,20 @@ public class DriverVehicleIssuesRepository {
         searchDriverVehicleIssuesParams.onNext(searchParams);
     }
 
-    public Completable saveDriverVehicleIssue(SaveDriverVehicleIssueRequestModel saveData) {
+    public Observable<Integer> saveDriverVehicleIssue(SaveDriverVehicleIssueRequestModel saveData) {
+
         return service.saveDriverVehicleIssue(saveData)
-                .flatMapCompletable(result -> {
-                    if (result.isValid()) return Completable.complete();
-                    else return Completable.error(new RuntimeException(result.getMessage()));
+                .flatMap(response -> {
+
+                    if (response.isValid()) {
+                        return Observable.just(response.getPayload());
+                    } else {
+                        return Observable.error(
+                                new RuntimeException(response.getMessage())
+                        );
+                    }
                 });
     }
+
+
 }

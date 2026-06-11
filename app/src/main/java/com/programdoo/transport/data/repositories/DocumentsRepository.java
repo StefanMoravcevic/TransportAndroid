@@ -1,7 +1,11 @@
 package com.programdoo.transport.data.repositories;
 
+import com.programdoo.transport.data.models.dtos.documents.DocumentDto;
 import com.programdoo.transport.data.models.responses.ResponseModel;
 import com.programdoo.transport.data.services.DocumentsService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -31,6 +35,19 @@ public class DocumentsRepository {
             int orgUnitId
     ) {
         return service.getNewNumber(documentSerieTypeId, orgUnitId);
+    }
+
+    public Observable<List<DocumentDto>> getDocuments(int documentType, int referenceId) {
+
+        return service.getDocuments(documentType, referenceId)
+                .map(response -> {
+
+                    if (response.isValid() && response.getPayload() != null) {
+                        return response.getPayload();
+                    }
+
+                    return new ArrayList<DocumentDto>();
+                });
     }
 
 }

@@ -115,7 +115,7 @@ public class    TravelOrdersListFragment extends BaseFragment {
 
                 documentsViewModel.uploadDocument(
                         uri,
-                        selectedItem,
+                        selectedItem.getId(),
                         viewModel.getSession().getUserId(),
                         requireContext(),
                         1025
