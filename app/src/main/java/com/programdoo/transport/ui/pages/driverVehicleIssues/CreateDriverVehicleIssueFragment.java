@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,18 +15,23 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.programdoo.transport.R;
+import com.programdoo.transport.data.models.dtos.documents.DocumentDto;
 import com.programdoo.transport.data.models.dtos.driverVehicleIssues.SaveDriverVehicleIssueRequestModel;
 import com.programdoo.transport.data.models.dtos.employees.EmployeeDto;
 import com.programdoo.transport.data.models.dtos.masterData.MasterDataDto;
 import com.programdoo.transport.data.models.dtos.travelOrders.SaveTravelOrderRequestModel;
+import com.programdoo.transport.data.settings.Settings;
 import com.programdoo.transport.databinding.FragmentCreateDriverVehicleIssueBinding;
 import com.programdoo.transport.databinding.FragmentCreateTravelOrderBinding;
 import com.programdoo.transport.ui.adapters.EmployeesRecyclerViewAdapter;
+import com.programdoo.transport.ui.adapters.ImagesAdapter;
 import com.programdoo.transport.ui.adapters.MasterDataRecyclerViewAdapter;
 import com.programdoo.transport.ui.pages.BaseActivity;
 import com.programdoo.transport.ui.pages.BaseFragment;
+import com.programdoo.transport.ui.viewmodels.documents.DocumentsViewModel;
 import com.programdoo.transport.ui.viewmodels.driverVehicleIssues.CreateDriverVehicleIssueViewModel;
 import com.programdoo.transport.ui.viewmodels.travelOrders.CreateTravelOrderViewModel;
+import com.programdoo.transport.utils.CameraHelper;
 import com.programdoo.transport.utils.Constants;
 import com.programdoo.transport.utils.DateUtil;
 import com.programdoo.transport.utils.UiUtil;
@@ -45,8 +51,14 @@ public class CreateDriverVehicleIssueFragment extends BaseFragment {
 
     private FragmentCreateDriverVehicleIssueBinding binding;
     private MasterDataRecyclerViewAdapter masterDataAdapter;
+    private ImagesAdapter imagesAdapter;
 
     private CreateDriverVehicleIssueViewModel viewModel;
+    private DocumentsViewModel documentsViewModel;
+
+    private CameraHelper cameraHelper;
+
+    private Integer savedItem;
 
 
 
@@ -77,13 +89,17 @@ public class CreateDriverVehicleIssueFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this).get(CreateDriverVehicleIssueViewModel.class);
+        documentsViewModel = new ViewModelProvider(this).get(DocumentsViewModel.class);
         masterDataAdapter = new MasterDataRecyclerViewAdapter(requireContext(), new ArrayList<>());
+        imagesAdapter = new ImagesAdapter(requireContext());
         setupToolbar();
         setupUI();
         readArguments();
         setupObservers();
         bindSelectInputs();
         loadData();
+        observeUpload();
+        initCamera();
     }
 
     private void bindSelectInputs() {
@@ -101,6 +117,25 @@ public class CreateDriverVehicleIssueFragment extends BaseFragment {
 
 
     }
+
+    private void initCamera() {
+
+        cameraHelper = new CameraHelper();
+
+        cameraHelper.init(this, uri -> {
+
+            if (savedItem != 0) {
+
+                documentsViewModel.uploadDocument(
+                        uri,
+                        savedItem,
+                        viewModel.getSession().getUserId(),
+                        requireContext(),
+                        2026
+                );
+            }
+        });
+    }
     private void readArguments() {
         if (getArguments() != null) {
             employeeId = getArguments().getLong("employeeId", -1);
@@ -114,6 +149,24 @@ public class CreateDriverVehicleIssueFragment extends BaseFragment {
         );
 
         binding.buttonSave.setOnClickListener(v -> saveDriverVehicleIssue());
+
+        binding.btnOpenCamera.setOnClickListener(v -> {
+
+            if (savedItem == null || savedItem == 0) {
+                Toast.makeText(requireContext(),
+                        "Prvo sačuvaj zapis",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            cameraHelper.openCamera(requireContext(), "issue_image");
+        });
+
+        binding.rvImages.setLayoutManager(
+                new androidx.recyclerview.widget.GridLayoutManager(requireContext(), 3)
+        );
+
+        binding.rvImages.setAdapter(imagesAdapter);
     }
 
     @SuppressLint("AutoDispose")
@@ -125,20 +178,23 @@ public class CreateDriverVehicleIssueFragment extends BaseFragment {
                         .subscribe(result -> {
 
                             Snackbar snackbar = Snackbar.make(
-                                    binding.getRoot(), getString(R.string.label_succesfullySaved),
+                                    binding.getRoot(),
+                                    getString(R.string.label_succesfullySaved),
                                     Snackbar.LENGTH_SHORT
                             );
 
+                            savedItem = result;
+
                             snackbar.setBackgroundTint(Color.parseColor("#2E7D32")); // green
                             snackbar.setTextColor(Color.WHITE);
-
                             snackbar.show();
 
-                            binding.getRoot().postDelayed(() -> {
-                                requireActivity()
-                                        .getSupportFragmentManager()
-                                        .popBackStack();
-                            }, 500);
+                            binding.cardImages.setVisibility(View.VISIBLE);
+
+                            binding.scrollView.post(() ->
+                                    binding.scrollView.fullScroll(View.FOCUS_DOWN)
+                            );
+
 
                         }, Throwable::printStackTrace)
         );
@@ -177,6 +233,49 @@ public class CreateDriverVehicleIssueFragment extends BaseFragment {
         disposables.clear();
 
         binding = null;
+    }
+
+    private void observeUpload() {
+
+        documentsViewModel.getUploadResult()
+                .observe(getViewLifecycleOwner(), result -> {
+
+                    if (result != null) {
+                        Toast.makeText(requireContext(),
+                                getString(R.string.label_succesfullyUploaded),
+                                Toast.LENGTH_SHORT).show();
+
+                        documentsViewModel.loadDocuments(
+                                2026,
+                                savedItem
+                        );
+                        observeDocuments();
+                    }
+                });
+
+        documentsViewModel.getUploadError()
+                .observe(getViewLifecycleOwner(), error -> {
+
+                    if (error != null) {
+                        Toast.makeText(requireContext(),
+                                "Upload failed: " + error,
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void observeDocuments() {
+
+        documentsViewModel.getDocuments()
+                .observe(getViewLifecycleOwner(), documents -> {
+
+                    if (documents == null || documents.isEmpty())
+                        return;
+
+                    imagesAdapter.setData(documents);
+
+                    binding.rvImages.setVisibility(View.VISIBLE);
+                });
     }
 
 }

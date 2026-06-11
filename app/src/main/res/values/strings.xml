@@ -93,11 +93,14 @@
     <string name="label_foreign_expenses_paid">Foreign expenses paid</string>
     <string name="label_status">Status</string>
     <string name="label_succesfullySaved">Successfully saved</string>
+    <string name="label_succesfullyUploaded">Successfully uploaded</string>
     <string name="label_createTravelOrder">Create travel order</string>
     <string name="label_notifications">Notifications</string>
     <string name="label_create_driver_vehicle_issue">Create driver vehicle issue</string>
     <string name="label_issues">Vehicle issues</string>
     <string name="label_defect_type">Defect type</string>
+    <string name="label_add_picture">Add picture</string>
+    <string name="label_image">Image</string>
 
 
 

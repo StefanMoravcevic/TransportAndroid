@@ -23,9 +23,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.rxjava3.subjects.PublishSubject;
 import lombok.Getter;
 
 @HiltViewModel
@@ -36,8 +38,7 @@ public class CreateDriverVehicleIssueViewModel extends BaseViewModel {
 
     private final MasterDataRepository masterDataRepository;
 
-    private final BehaviorSubject<Boolean> saveResultSubject =
-            BehaviorSubject.create();
+    private final PublishSubject<Integer> saveResultSubject = PublishSubject.create();
 
     @Getter
     private final LiveData<List<MasterDataDto>> vehicleDefectTypes;
@@ -65,19 +66,25 @@ public class CreateDriverVehicleIssueViewModel extends BaseViewModel {
 
     public void saveDriverVehicleIssue(SaveDriverVehicleIssueRequestModel model) {
 
-        handleCompletable(
-                driverVehicleIssuesRepository.saveDriverVehicleIssue(model),
-                () -> {
-                    toastEvent.setValue(1);
-                    saveResultSubject.onNext(true);
-                },
-                throwable -> {
-                    toastEvent.setValue(2);
-                }
+        disposables.add(
+                driverVehicleIssuesRepository.saveDriverVehicleIssue(model)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+
+                                    toastEvent.setValue(1);
+
+                                    if (response != null) {
+                                        saveResultSubject.onNext(response);
+                                    }
+
+                                },
+                                throwable -> toastEvent.setValue(2)
+                        )
         );
     }
 
-    public Observable<Boolean> getSaveResult() {
+    public Observable<Integer> getSaveResult() {
         return saveResultSubject.hide();
     }
 }

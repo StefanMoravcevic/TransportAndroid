@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
 import com.programdoo.transport.data.eventbus.AuthEventBus;
+import com.programdoo.transport.data.models.dtos.documents.DocumentDto;
 import com.programdoo.transport.data.models.dtos.documents.UploadDocumentRequestModel;
 import com.programdoo.transport.data.models.dtos.travelOrders.TravelOrderDto;
 import com.programdoo.transport.data.repositories.DocumentsRepository;
@@ -19,6 +20,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -38,6 +40,12 @@ public class DocumentsViewModel extends BaseViewModel {
     private final MutableLiveData<Boolean> uploadLoading = new MutableLiveData<>();
     private final MutableLiveData<Integer> uploadResult = new MutableLiveData<>();
     private final MutableLiveData<String> uploadError = new MutableLiveData<>();
+
+    private final MutableLiveData<List<DocumentDto>> documents = new MutableLiveData<>();
+
+    public LiveData<List<DocumentDto>> getDocuments() {
+        return documents;
+    }
 
 
     @Inject
@@ -65,7 +73,7 @@ public class DocumentsViewModel extends BaseViewModel {
 
     public void uploadDocument(
             Uri uri,
-            TravelOrderDto item,
+            Integer item,
             int userId,
             Context context,
             int documentTypeId
@@ -106,7 +114,7 @@ public class DocumentsViewModel extends BaseViewModel {
                     );
 
             UploadDocumentRequestModel model = new UploadDocumentRequestModel();
-            model.setReferenceId(item.getId());
+            model.setReferenceId(item);
             model.setUserId(userId);
             model.setFileName(file.getName());
             model.setDocumentTypeId(documentTypeId);
@@ -139,6 +147,19 @@ public class DocumentsViewModel extends BaseViewModel {
             uploadLoading.setValue(false);
             uploadError.setValue(e.getMessage());
         }
+    }
+
+    public void loadDocuments(int documentType, int referenceId) {
+
+        disposables.add(
+                documentsRepository.getDocuments(documentType, referenceId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                result -> documents.setValue(result),
+                                throwable -> uploadError.setValue(throwable.getMessage())
+                        )
+        );
     }
 
 }

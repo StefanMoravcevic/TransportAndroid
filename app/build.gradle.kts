@@ -45,7 +45,9 @@ dependencies {
 	implementation(libs.navigation.fragment)
 	implementation(libs.navigation.ui)
 	implementation(libs.jwt.decode)
-	implementation("com.google.android.gms:play-services-location:21.0.1")
+	implementation ("com.google.android.gms:play-services-location:21.0.1")
+	implementation ("com.github.bumptech.glide:glide:4.16.0")
+	annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
 	// api
 	implementation(libs.okhttp)
@@ -56,6 +58,7 @@ dependencies {
 	implementation(libs.retrofit.converter.gson)
 	implementation(libs.retrofit.adapter.rxjava3)
 	implementation(libs.reactive.streams)
+
 
 	// dependency injection
 	implementation(libs.hilt)
