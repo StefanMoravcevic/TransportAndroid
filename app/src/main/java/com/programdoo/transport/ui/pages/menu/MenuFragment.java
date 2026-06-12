@@ -77,7 +77,16 @@ public class MenuFragment extends BaseFragment {
                 .get(ExpiringDocumentsViewModel.class);
 
         int employeeId = expiringViewModel.getLoggedEmployeeId();
-        expiringViewModel.loadExpiringNotificationDocuments(employeeId);
+
+        expiringViewModel.getExpiringDocumentsDone().observe(
+                getViewLifecycleOwner(),
+                done -> {
+                    if (Boolean.TRUE.equals(done)) {
+                        expiringViewModel.loadExpiringNotificationDocuments(employeeId);
+                    }
+                });
+
+        expiringViewModel.loadExpiringDocuments(employeeId);
 
         notificationAction = new ToolbarAction(
                 R.id.action_notifications,

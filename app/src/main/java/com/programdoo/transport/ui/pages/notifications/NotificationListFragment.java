@@ -29,6 +29,7 @@ public class NotificationListFragment extends BaseFragment {
     private FragmentNotificationsBinding binding;
     private ExpiringDocumentsViewModel viewModel;
     private NotificationsAdapter adapter;
+
     @Override
     public String TAG() {
         return Constants.FRAG_NOTIFICATIONS;
@@ -46,28 +47,29 @@ public class NotificationListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        setupToolbar();
+
         RecyclerView.ItemAnimator animator = new DefaultItemAnimator();
         animator.setRemoveDuration(200);
         animator.setAddDuration(200);
         binding.recyclerView.setItemAnimator(animator);
-        setupToolbar();
-        // 1. ViewModel
+
         viewModel = new ViewModelProvider(this).get(ExpiringDocumentsViewModel.class);
 
-        // 2. Adapter
         adapter = new NotificationsAdapter();
+
         int employeeId = viewModel.getLoggedEmployeeId();
+
         adapter.setListener(notificationId -> {
-            viewModel.markNotificationAsRead(notificationId,employeeId);
+            viewModel.markNotificationAsRead(notificationId, employeeId);
         });
+        adapter.setHistoryMode(false);
 
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(requireContext())
         );
 
         binding.recyclerView.setAdapter(adapter);
-
-
 
         viewModel.loadExpiringDocuments(employeeId);
         viewModel.loadExpiringNotificationDocuments(employeeId);
@@ -76,22 +78,37 @@ public class NotificationListFragment extends BaseFragment {
             viewModel.markAllNotificationsAsRead(employeeId);
         });
 
-        // 4. Observe
-        viewModel.getExpiringDocumentsNotifications().observe(getViewLifecycleOwner(), list -> {
-            adapter.setData(list);
-            int count = 0;
+        binding.btnNotificationHistories.setOnClickListener(v -> {
 
-            if (list != null) {
-                for (EmployeeNotificationDto dto : list) {
-                    if (!dto.isRead()) {
-                        count++;
-                    }
-                }
-            }
+            NotificationHistoryFragment fragment = new NotificationHistoryFragment();
 
-            viewModel.setUnreadCount(count);
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentFrame, fragment)
+                    .addToBackStack(null)
+                    .commit();
         });
+
+        viewModel.getExpiringDocumentsNotifications()
+                .observe(getViewLifecycleOwner(), list -> {
+
+                    adapter.setData(list);
+
+                    int count = 0;
+
+                    if (list != null) {
+                        for (EmployeeNotificationDto dto : list) {
+                            if (!dto.isRead()) {
+                                count++;
+                            }
+                        }
+                    }
+
+                    viewModel.setUnreadCount(count);
+                });
     }
+
     private void setupToolbar() {
         ((BaseActivity) requireActivity())
                 .setToolbarTitle(getString(R.string.label_notifications));
@@ -100,5 +117,3 @@ public class NotificationListFragment extends BaseFragment {
         ((BaseActivity) requireActivity()).clearToolbarActions();
     }
 }
-
-

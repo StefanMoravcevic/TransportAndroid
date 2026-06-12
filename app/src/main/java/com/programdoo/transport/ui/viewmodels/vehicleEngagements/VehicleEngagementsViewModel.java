@@ -55,7 +55,8 @@ public class VehicleEngagementsViewModel extends BaseViewModel {
                     dto.getEmployee(),
                     dto.getVehicle(),
                     dto.getIndebtednessDateFormatted(),
-                    dto.getDivorceDateFormatted()
+                    dto.getDivorceDateFormatted(),
+                    dto.getDivorceNote()
             ));
         }
 

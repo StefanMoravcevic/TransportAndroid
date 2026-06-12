@@ -32,7 +32,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="@string/label_employees"/>
-
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -91,6 +90,7 @@
                 android:orientation="vertical"
                 android:padding="12dp">
 
+                <!-- ROW 1 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -114,10 +114,11 @@
                         android:hint="@string/label_return_date"/>
                 </LinearLayout>
 
+                <!-- ROW 2 (border crossing - tightened) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="4dp">
 
                     <com.programdoo.transport.ui.views.ProgramInputField
                         android:id="@+id/selBorderCrossingToDate"
@@ -136,14 +137,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="@string/label_borderCrossingFromDate"/>
-
                 </LinearLayout>
 
+                <!-- CHECKBOX (tight spacing) -->
                 <CheckBox
                     android:id="@+id/cbForeignExpensesPaid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="0dp"
                     android:text="@string/label_foreign_expenses_paid"/>
 
             </LinearLayout>
@@ -176,7 +177,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/selTravelPlace"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="50dp"
                         android:gravity="top"
                         android:inputType="textMultiLine"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -207,30 +208,26 @@
             android:id="@+id/actionButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/BottomButtonBar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView">
+            style="@style/BottomButtonBar">
 
             <Button
                 android:id="@+id/buttonCancel"
                 style="@style/ProgramButton.Cancel"
                 android:text="@string/label_cancel"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/buttonSave"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"/>
 
             <Button
                 android:id="@+id/buttonSave"
                 style="@style/ProgramButton.Primary"
                 android:text="@string/label_save"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/buttonCancel"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

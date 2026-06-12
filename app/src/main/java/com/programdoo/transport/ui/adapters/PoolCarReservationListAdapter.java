@@ -58,11 +58,12 @@ public class PoolCarReservationListAdapter extends RecyclerView.Adapter<PoolCarR
         }
 
         void bind(ReservationListItem item) {
-
             binding.tvDriver.setText(item.getDriver());
             binding.tvVehicle.setText(item.getVehicle());
             binding.tvFrom.setText(item.getDateFrom());
             binding.tvTo.setText(item.getDateTo());
+            binding.tvNote.setText(item.getNote());
+            binding.tvNote.setSelected(true);
         }
     }
 }

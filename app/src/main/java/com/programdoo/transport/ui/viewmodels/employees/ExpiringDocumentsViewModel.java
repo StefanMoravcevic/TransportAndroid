@@ -29,6 +29,21 @@ public class ExpiringDocumentsViewModel extends BaseViewModel {
     private final EmployeesRepository employeesRepository;
     private final EmployeeNotificationsRepository employeeNotificationsRepository;
 
+    private final MutableLiveData<Boolean> expiringDocumentsDone = new MutableLiveData<>();
+
+    private final MutableLiveData<Boolean> showHistory = new MutableLiveData<>(false);
+
+    public LiveData<Boolean> getShowHistory() {
+        return showHistory;
+    }
+
+    public void setShowHistory(boolean value) {
+        showHistory.setValue(value);
+    }
+
+    public LiveData<Boolean> getExpiringDocumentsDone() {
+        return expiringDocumentsDone;
+    }
     private final MutableLiveData<List<EmployeeDocumentAlertDto>> expiringDocuments =
             new MutableLiveData<>();
 
@@ -43,6 +58,13 @@ public class ExpiringDocumentsViewModel extends BaseViewModel {
 
     public LiveData<List<EmployeeNotificationDto>> getExpiringDocumentsNotifications() {
         return expiringDocumentsNotifications;
+    }
+
+    private final MutableLiveData<List<EmployeeNotificationDto>> checkedNotifications =
+            new MutableLiveData<>();
+
+    public LiveData<List<EmployeeNotificationDto>> getCheckedNotifications() {
+        return checkedNotifications;
     }
 
     @Getter @Setter
@@ -83,9 +105,15 @@ public class ExpiringDocumentsViewModel extends BaseViewModel {
                             } else {
                                 expiringDocuments.postValue(Collections.emptyList());
                             }
+
+
+                            expiringDocumentsDone.postValue(true);
                         },
                         throwable -> {
                             expiringDocuments.postValue(Collections.emptyList());
+
+                            // i dalje signal da se nastavi
+                            expiringDocumentsDone.postValue(false);
                         }
                 );
     }
@@ -119,6 +147,29 @@ public class ExpiringDocumentsViewModel extends BaseViewModel {
                         throwable -> {
                             expiringDocumentsNotifications.postValue(Collections.emptyList());
                             unreadCount.postValue(0);
+                        }
+                );
+    }
+
+    public void loadCheckedNotifications(int employeeId) {
+
+        employeeNotificationsRepository.loadReadDocuments(employeeId);
+
+        disposable = employeeNotificationsRepository.getReadNotifications()
+                .subscribe(
+                        response -> {
+                            if (response != null && response.getPayload() != null) {
+
+                                List<EmployeeNotificationDto> notifications = response.getPayload();
+
+                                checkedNotifications.postValue(notifications);
+
+                            } else {
+                                checkedNotifications.postValue(Collections.emptyList());
+                            }
+                        },
+                        throwable -> {
+                            checkedNotifications.postValue(Collections.emptyList());
                         }
                 );
     }

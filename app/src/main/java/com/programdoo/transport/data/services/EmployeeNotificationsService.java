@@ -21,6 +21,11 @@ public interface EmployeeNotificationsService {
             @Path("employeeId") int employeeId
     );
 
+    @GET("employeeNotifications/getReadNotifications/{employeeId}")
+    Observable<ResponseModelList<EmployeeNotificationDto>> getReadEmployeeNotifications(
+            @Path("employeeId") int employeeId
+    );
+
     @POST("employeeNotifications/markAllAsRead/{employeeId}")
     Observable<ResponseModelBase> markAllAsRead(@Path("employeeId") int employeeId);
 

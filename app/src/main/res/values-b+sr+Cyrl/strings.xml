@@ -101,4 +101,5 @@
     <string name="label_add_picture">Додај слику</string>
     <string name="label_image">Слика</string>
     <string name="label_succesfullyUploaded">Успешно закачен документ</string>
+    <string name="label_notification_history">Историја обавештења</string>
 </resources>
