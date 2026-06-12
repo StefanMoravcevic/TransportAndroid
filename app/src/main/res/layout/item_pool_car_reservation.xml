@@ -12,11 +12,11 @@
     app:strokeColor="@color/primaryLighter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp">
 
+        <!-- DRIVER -->
         <TextView
             android:id="@+id/tvDriver"
             style="@style/ProgramTextView.Regular"
@@ -26,29 +26,11 @@
             android:textStyle="bold"
             android:drawablePadding="4dp"
             app:drawableStartCompat="@drawable/icon_trainer_medium"
-            app:drawableTint="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvFrom"/>
 
-        <TextView
-            android:id="@+id/tvVehicle"
-            style="@style/ProgramTextView.Regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:drawablePadding="4dp"
-            android:paddingStart="2dp"
-            android:layout_marginTop="4dp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            app:drawableStartCompat="@drawable/icon_vehicle_small"
-            app:drawableTint="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDriver"
-            app:layout_constraintEnd_toStartOf="@id/tvFrom"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
+        <!-- FROM -->
         <TextView
             android:id="@+id/tvFrom"
             style="@style/ProgramTextView.Regular"
@@ -60,6 +42,42 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+        <!-- VEHICLE -->
+        <TextView
+            android:id="@+id/tvVehicle"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:drawablePadding="4dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:drawableStartCompat="@drawable/icon_vehicle_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDriver"
+            app:layout_constraintEnd_toStartOf="@id/tvFrom"/>
+
+        <!-- NOTE (MARQUEE) -->
+        <TextView
+            android:id="@+id/tvNote"
+            style="@style/ProgramTextView.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="#666666"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+            android:scrollHorizontally="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvVehicle"
+            app:layout_constraintEnd_toStartOf="@id/tvFrom"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!-- TO -->
         <TextView
             android:id="@+id/tvTo"
             style="@style/ProgramTextView.Regular"
@@ -69,8 +87,7 @@
             android:gravity="end"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvFrom"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/tvFrom"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

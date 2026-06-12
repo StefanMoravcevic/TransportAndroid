@@ -53,7 +53,8 @@ public class PoolCarReservationListViewModel extends BaseViewModel {
                     dto.getEmployee(),
                     dto.getVehicle(),
                     dto.getDateFromFormatted(),
-                    dto.getDateToFormatted()
+                    dto.getDateToFormatted(),
+                    dto.getNote()
             ));
         }
 

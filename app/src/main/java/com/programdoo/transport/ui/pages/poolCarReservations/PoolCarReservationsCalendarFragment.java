@@ -2,7 +2,10 @@ package com.programdoo.transport.ui.pages.poolCarReservations;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,9 +27,11 @@ import com.programdoo.transport.ui.pages.BaseActivity;
 import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.viewmodels.poolCarReservations.PoolCarReservationCalendarViewModel;
 import com.programdoo.transport.utils.Constants;
+import com.programdoo.transport.utils.UiUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -38,7 +43,10 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
 
     private FragmentPoolcarCalendarBinding binding;
     private PoolCarReservationCalendarViewModel viewModel;
+    private GestureDetector gestureDetector;
     private PoolCarCalendarAdapter adapter;
+
+    private LocalDate selectedDate = LocalDate.now();
 
     @Override
     public String TAG() {
@@ -64,7 +72,11 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
                               @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-
+        binding.tvDateFrom.setText(
+                LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+        );
+        selectedDate = LocalDate.now();
+        loadSelectedDay();
         setupToolbar();
         setupCalendar();
         setupObservers();
@@ -79,8 +91,24 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
                     boolean refresh = bundle.getBoolean("refresh_calendar", false);
 
                     if (refresh) {
-                        viewModel.refreshData(); // 🔥 REFRESH
+                        viewModel.refreshData();
                     }
+                }
+        );
+
+        UiUtil.datePickerSetupCallback(
+                this,
+                binding.tvDateFrom,
+                () -> {
+
+                    String value = binding.tvDateFrom.getText().toString();
+
+                    selectedDate = LocalDate.parse(
+                            value,
+                            java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy")
+                    );
+
+                    loadSelectedDay();
                 }
         );
     }
@@ -91,6 +119,35 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
 
         ((BaseActivity) requireActivity()).clearToolbarSubtitle();
         ((BaseActivity) requireActivity()).clearToolbarActions();
+    }
+
+    private void loadSelectedDay() {
+
+        LocalDateTime start = selectedDate.atStartOfDay();
+        LocalDateTime end = selectedDate.plusDays(1).atStartOfDay();
+
+        SearchPoolCarReservationParams params =
+                new SearchPoolCarReservationParams();
+
+        params.dateFrom = start;
+        params.dateTo = end;
+
+        viewModel.getRepository()
+                .searchPoolCarReservations(params);
+
+        moveCalendarToSelectedDate();
+    }
+
+    private void moveCalendarToSelectedDate() {
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(
+                selectedDate.getYear(),
+                selectedDate.getMonthValue() - 1,
+                selectedDate.getDayOfMonth()
+        );
+
+        binding.weekView.goToDate(cal);
     }
 
     // ---------------- CALENDAR ----------------
@@ -117,7 +174,51 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
             // edit
         });
 
+
+       // binding.weekView.setOnTouchListener((v, event) -> {
+
+            //gestureDetector.onTouchEvent(event);
+
+           // return false; // BITNO da WeekView i dalje radi scroll
+        //});
     }
+
+    /*private void handleClickAtPosition(MotionEvent event) {
+
+        int startHour = 6;
+
+        int hourHeightPx = binding.weekView.getHourHeight();
+
+        int[] location = new int[2];
+        binding.weekView.getLocationOnScreen(location);
+
+        // 🔥 stabilan Y bez scrollY hacka
+        float y = event.getRawY() - location[1];
+
+        int hourOffset = (int) (y / hourHeightPx);
+
+        int hour = startHour + hourOffset;
+
+        int minute = (int) (((y % hourHeightPx) / (float) hourHeightPx) * 60);
+
+        // clamp
+        if (hour < 6) hour = 6;
+        if (hour > 23) hour = 23;
+
+        Log.d("CAL_DEBUG", "y=" + y);
+        Log.d("CAL_DEBUG", "hourOffset=" + hourOffset);
+        Log.d("CAL_DEBUG", "hour=" + hour);
+        Log.d("CAL_DEBUG", "minute=" + minute);
+
+        LocalDateTime from = selectedDate.atTime(hour, 0);
+        LocalDateTime to = selectedDate.atTime(hour + 1, 0);
+
+        openCreateReservationFromPress(from, to);
+    }
+
+    private int dpToPx(int dp) {
+        return (int) (dp * getResources().getDisplayMetrics().density);
+    }*/
 
     // ---------------- OBSERVER ----------------
 
@@ -152,7 +253,9 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
             viewModel.refreshData();
         });
 
-        binding.fabNewReservation.setOnClickListener(v -> openCreateReservation());
+        binding.fabNewReservation.setOnClickListener(v ->
+                openCreateReservation(LocalDate.now())
+        );
     }
 
     // ---------------- LOAD ----------------
@@ -176,18 +279,21 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
                 .searchPoolCarReservations(params);
     }
 
-    private void openCreateReservation() {
+    private void openCreateReservation(LocalDate date) {
 
         CreatePoolCarReservationFragment fragment =
                 new CreatePoolCarReservationFragment();
-
-        requireActivity().setTitle("Create Pool Car Reservation");
 
         Bundle args = new Bundle();
 
         args.putLong(
                 "employeeId",
                 viewModel.getSession().getEntityId()
+        );
+
+        args.putString(
+                "selectedDate",
+                date.toString()
         );
 
         fragment.setArguments(args);
@@ -199,5 +305,27 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
                 .addToBackStack(null)
                 .commit();
     }
+
+    private void openCreateReservationFromPress(LocalDateTime from, LocalDateTime to) {
+
+        CreatePoolCarReservationFragment fragment =
+                new CreatePoolCarReservationFragment();
+
+        Bundle args = new Bundle();
+
+        args.putLong("employeeId", viewModel.getSession().getEntityId());
+        args.putString("from", from.toString());
+        args.putString("to", to.toString());
+
+        fragment.setArguments(args);
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentFrame, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
 
 }

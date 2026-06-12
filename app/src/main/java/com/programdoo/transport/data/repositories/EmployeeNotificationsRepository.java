@@ -23,7 +23,13 @@ public class EmployeeNotificationsRepository {
     @Getter
     private final Observable<ResponseModelList<EmployeeNotificationDto>> notifications;
 
+    @Getter
+    private final Observable<ResponseModelList<EmployeeNotificationDto>> readNotifications;
+
     private final BehaviorSubject<Integer> expiringNotificationsRequest
+            = BehaviorSubject.create();
+
+    private final BehaviorSubject<Integer> readNotificationsRequest
             = BehaviorSubject.create();
 
     @Inject
@@ -36,10 +42,19 @@ public class EmployeeNotificationsRepository {
                 expiringNotificationsRequest,
                 service::getEmployeeNotifications
         );
+
+        readNotifications = RepositoryOperators.createDataStream(
+                readNotificationsRequest,
+                service::getReadEmployeeNotifications
+        );
     }
 
     public void loadExpiringDocuments(int employeeId) {
         expiringNotificationsRequest.onNext(employeeId);
+    }
+
+    public void loadReadDocuments(int employeeId) {
+        readNotificationsRequest.onNext(employeeId);
     }
 
     public Completable markAllAsRead(int employeeId) {

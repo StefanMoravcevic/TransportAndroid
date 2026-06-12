@@ -1,7 +1,6 @@
 package com.programdoo.transport.ui.pages.travelOrders;
 
 import android.annotation.SuppressLint;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,30 +20,34 @@ import com.programdoo.transport.databinding.FragmentTravelOrdersListBinding;
 import com.programdoo.transport.ui.pages.BaseActivity;
 import com.programdoo.transport.ui.pages.BaseFragment;
 import com.programdoo.transport.ui.adapters.TravelOrderRecyclerListAdapter;
-import com.programdoo.transport.ui.pages.poolCarReservations.CreatePoolCarReservationFragment;
 import com.programdoo.transport.ui.viewmodels.documents.DocumentsViewModel;
 import com.programdoo.transport.ui.viewmodels.travelOrders.TravelOrdersListViewModel;
 import com.programdoo.transport.utils.CameraHelper;
 import com.programdoo.transport.utils.Constants;
+import com.programdoo.transport.utils.UiUtil;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 @AndroidEntryPoint
-public class    TravelOrdersListFragment extends BaseFragment {
+public class TravelOrdersListFragment extends BaseFragment {
 
     private FragmentTravelOrdersListBinding binding;
     private TravelOrdersListViewModel viewModel;
     private DocumentsViewModel documentsViewModel;
 
-
     private TravelOrderRecyclerListAdapter adapter;
     private final CompositeDisposable disposables = new CompositeDisposable();
 
     private CameraHelper cameraHelper;
-
     private TravelOrderDto selectedItem;
+
+    private Integer currentStatus = null;
 
     @Override
     public String TAG() {
@@ -67,27 +70,99 @@ public class    TravelOrdersListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        initDefaultDateRange();
+        applyFilters();
         setupToolbar();
         setupRecyclerView();
         observeData();
         observeUpload();
-        loadData();
 
-        binding.rvTravelOrders.addItemDecoration(
-                new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        );
+        setupFilters();
 
-        binding.fabNewTravelOrder.setOnClickListener(v -> openCreateTravelOrder());
+        applyFilters();
 
         initCamera();
     }
 
-    private void setupToolbar() {
-        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_travelOrders));
-        ((BaseActivity) requireActivity()).clearToolbarSubtitle();
-        ((BaseActivity) requireActivity()).clearToolbarActions();
+    // ================= FILTERS =================
+
+    private void setupFilters() {
+
+        // STATUS CHIPS
+        binding.chipAll.setOnClickListener(v -> {
+            currentStatus = null;
+            applyFilters();
+        });
+
+        binding.chipZakazan.setOnClickListener(v -> {
+            currentStatus = 1;
+            applyFilters();
+        });
+
+        binding.chipRealizovan.setOnClickListener(v -> {
+            currentStatus = 2;
+            applyFilters();
+        });
+
+        binding.chipObracunat.setOnClickListener(v -> {
+            currentStatus = 3;
+            applyFilters();
+        });
+
+        binding.chipOtkazan.setOnClickListener(v -> {
+            currentStatus = 4;
+            applyFilters();
+        });
+
+        // DATE PICKERS (VAŽNO: callback)
+        UiUtil.datePickerSetupCallback(
+                this,
+                binding.tvDateFrom,
+                this::applyFilters
+        );
+
+        UiUtil.datePickerSetupCallback(
+                this,
+                binding.tvDateTo,
+                this::applyFilters
+        );
     }
+
+    private void applyFilters() {
+        loadData(currentStatus);
+    }
+
+    private void initDefaultDateRange() {
+
+        LocalDate now = LocalDate.now();
+
+        LocalDate firstDay = now.withDayOfMonth(1);
+        LocalDate lastDay = now.withDayOfMonth(now.lengthOfMonth());
+
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        binding.tvDateFrom.setText(firstDay.format(formatter));
+        binding.tvDateTo.setText(lastDay.format(formatter));
+    }
+
+    // ================= DATA =================
+
+    private void loadData(Integer travelOrderStatusId) {
+
+        int employeeId = viewModel.getSession().getEntityId();
+
+        var params = new com.programdoo.transport.data.models.requests.travelOrders.SearchTravelOrdersParams();
+        params.setEmployeeId(employeeId);
+        params.setTravelOrderStatusId(travelOrderStatusId);
+
+        params.setDateFrom(getDateFrom());
+        params.setDateTo(getDateTo());
+
+        viewModel.searchTravelOrders(params);
+    }
+
+    // ================= RECYCLER =================
 
     private void setupRecyclerView() {
 
@@ -99,30 +174,14 @@ public class    TravelOrdersListFragment extends BaseFragment {
 
         binding.rvTravelOrders.setAdapter(adapter);
 
-        adapter.setOnCameraClickListener(item -> {
-            selectedItem = item;
-            cameraHelper.openCamera(requireContext(), "travel_order");
-        });
+        binding.rvTravelOrders.addItemDecoration(
+                new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        );
+
+        binding.fabNewTravelOrder.setOnClickListener(v -> openCreateTravelOrder());
     }
 
-    private void initCamera() {
-
-        cameraHelper = new CameraHelper();
-
-        cameraHelper.init(this, uri -> {
-
-            if (selectedItem != null) {
-
-                documentsViewModel.uploadDocument(
-                        uri,
-                        selectedItem.getId(),
-                        viewModel.getSession().getUserId(),
-                        requireContext(),
-                        1025
-                );
-            }
-        });
-    }
+    // ================= OBSERVE =================
 
     @SuppressLint("AutoDispose")
     private void observeData() {
@@ -149,19 +208,17 @@ public class    TravelOrdersListFragment extends BaseFragment {
 
         documentsViewModel.getUploadResult()
                 .observe(getViewLifecycleOwner(), result -> {
-
                     if (result != null) {
                         Toast.makeText(requireContext(),
                                 "Upload successful ✔",
                                 Toast.LENGTH_SHORT).show();
 
-                        loadData();
+                        applyFilters();
                     }
                 });
 
         documentsViewModel.getUploadError()
                 .observe(getViewLifecycleOwner(), error -> {
-
                     if (error != null) {
                         Toast.makeText(requireContext(),
                                 "Upload failed: " + error,
@@ -170,15 +227,56 @@ public class    TravelOrdersListFragment extends BaseFragment {
                 });
     }
 
-    private void loadData() {
+    // ================= DATE PARSING =================
 
-        int employeeId = viewModel.getSession().getEntityId();
+    private LocalDateTime getDateFrom() {
 
-        var params = new com.programdoo.transport.data.models.requests.travelOrders.SearchTravelOrdersParams();
-        params.setEmployeeId(employeeId);
+        String value = binding.tvDateFrom.getText().toString();
 
-        viewModel.searchTravelOrders(params);
+        if (value.isEmpty() || value.equals("Od datuma"))
+            return null;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        return LocalDate.parse(value, formatter)
+                .atStartOfDay();
     }
+
+    private LocalDateTime getDateTo() {
+
+        String value = binding.tvDateTo.getText().toString();
+
+        if (value.isEmpty() || value.equals("Do datuma"))
+            return null;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        return LocalDate.parse(value, formatter)
+                .atTime(23, 59, 59);
+    }
+
+    // ================= CAMERA =================
+
+    private void initCamera() {
+
+        cameraHelper = new CameraHelper();
+
+        cameraHelper.init(this, uri -> {
+
+            if (selectedItem != null) {
+
+                documentsViewModel.uploadDocument(
+                        uri,
+                        selectedItem.getId(),
+                        viewModel.getSession().getUserId(),
+                        requireContext(),
+                        1025
+                );
+            }
+        });
+    }
+
+    // ================= LIFECYCLE =================
 
     @Override
     public void onDestroyView() {
@@ -187,17 +285,18 @@ public class    TravelOrdersListFragment extends BaseFragment {
         binding = null;
     }
 
+    private void setupToolbar() {
+        ((BaseActivity) requireActivity()).setToolbarTitle(getString(R.string.label_travelOrders));
+        ((BaseActivity) requireActivity()).clearToolbarSubtitle();
+        ((BaseActivity) requireActivity()).clearToolbarActions();
+    }
+
     private void openCreateTravelOrder() {
 
-        CreateTravelOrderFragment fragment =
-                new CreateTravelOrderFragment();
+        CreateTravelOrderFragment fragment = new CreateTravelOrderFragment();
 
         Bundle args = new Bundle();
-
-        args.putLong(
-                "employeeId",
-                viewModel.getSession().getEntityId()
-        );
+        args.putLong("employeeId", viewModel.getSession().getEntityId());
 
         fragment.setArguments(args);
 

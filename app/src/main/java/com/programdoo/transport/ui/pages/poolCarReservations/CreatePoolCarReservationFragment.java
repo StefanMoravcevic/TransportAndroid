@@ -32,7 +32,9 @@ import com.programdoo.transport.ui.viewmodels.poolCarReservations.PoolCarReserva
 import com.programdoo.transport.utils.DateUtil;
 import com.programdoo.transport.utils.UiUtil;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +56,12 @@ public class CreatePoolCarReservationFragment extends BaseFragment {
 
     private EmployeeDto selectedEmployee;
     private VehicleDto selectedVehicle;
+
+    private LocalDate selectedDate;
+
+    private boolean hasTimeRange = false;
+    private LocalDateTime fromTime;
+    private LocalDateTime toTime;
 
     @Override
     public String TAG() {
@@ -84,14 +92,33 @@ public class CreatePoolCarReservationFragment extends BaseFragment {
         setupObservers();
         setupToolbar();
         loadData();
+        prefillDates();
         UiUtil.dateTimePickerSetup(this, binding.validFrom);
         UiUtil.dateTimePickerSetup(this, binding.validTo);
     }
 
 
     private void readArguments() {
+
         if (getArguments() != null) {
+
             employeeId = getArguments().getLong("employeeId", -1);
+
+            String date = getArguments().getString("selectedDate", null);
+            if (date != null) {
+                selectedDate = LocalDate.parse(date);
+            }
+
+            String from = getArguments().getString("from", null);
+            String to = getArguments().getString("to", null);
+
+            if (from != null && to != null) {
+
+                fromTime = LocalDateTime.parse(from);
+                toTime = LocalDateTime.parse(to);
+
+                hasTimeRange = true;
+            }
         }
     }
 
@@ -102,6 +129,25 @@ public class CreatePoolCarReservationFragment extends BaseFragment {
         );
 
         binding.buttonSave.setOnClickListener(v -> saveReservation());
+    }
+
+    private void prefillDates() {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
+        if (hasTimeRange) {
+
+            binding.validFrom.setText(fromTime.format(formatter));
+            binding.validTo.setText(toTime.format(formatter));
+
+        } else if (selectedDate != null) {
+
+            LocalDateTime from = selectedDate.atStartOfDay();
+            LocalDateTime to = selectedDate.atTime(23, 59);
+
+            binding.validFrom.setText(from.format(formatter));
+            binding.validTo.setText(to.format(formatter));
+        }
     }
 
     // ---------------- LOAD ----------------

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
@@ -156,6 +157,43 @@ public class UiUtil {
         picker.addOnPositiveButtonClickListener(selection -> {
             LocalDateTime selectedDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(selection), TimeZone.getDefault().toZoneId());
             pif.setText(DateUtil.format(selectedDate));
+        });
+    }
+
+    public static void datePickerSetupCallback(
+            BaseFragment frag,
+            TextView tv,
+            Runnable onDateSelected
+    ) {
+        tv.setClickable(true);
+        tv.setFocusable(false);
+
+        LocalDateTime initDate = DateUtil.parse(tv.getText().toString());
+        if (initDate == null) initDate = LocalDateTime.now();
+
+        MaterialDatePicker<Long> picker = MaterialDatePicker.Builder
+                .datePicker()
+                .setSelection(initDate.toInstant(ZoneOffset.UTC).toEpochMilli())
+                .setTitleText(frag.requireContext().getString(R.string.label_select_date))
+                .build();
+
+        tv.setOnClickListener(v -> {
+            picker.show(frag.getParentFragmentManager(), Constants.FRAG_DATE_PICKER);
+        });
+
+        picker.addOnPositiveButtonClickListener(selection -> {
+
+            LocalDateTime selectedDate =
+                    LocalDateTime.ofInstant(
+                            Instant.ofEpochMilli(selection),
+                            TimeZone.getDefault().toZoneId()
+                    );
+
+            tv.setText(DateUtil.format(selectedDate));
+
+            if (onDateSelected != null) {
+                onDateSelected.run();
+            }
         });
     }
     public static void timePickerSetup(

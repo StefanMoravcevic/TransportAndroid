@@ -21,6 +21,12 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_NOTIFICATION = 1;
 
+    private boolean isHistoryMode = false;
+
+    public void setHistoryMode(boolean historyMode) {
+        this.isHistoryMode = historyMode;
+    }
+
     // -------------------------
     // LIST DATA
     // -------------------------
@@ -145,7 +151,11 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else {
             vh.viewStatus.setBackgroundResource(R.drawable.bg_dot_orange);
         }
-
+        if (isHistoryMode) {
+            vh.ivMarkRead.setVisibility(View.GONE);
+        } else {
+            vh.ivMarkRead.setVisibility(View.VISIBLE);
+        }
         // -------------------------
         // READ UI STATE
         // -------------------------
@@ -208,6 +218,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             tvDate = itemView.findViewById(R.id.tvDate);
             viewStatus = itemView.findViewById(R.id.viewStatus);
             ivMarkRead = itemView.findViewById(R.id.ivMarkRead);
+
         }
     }
 }

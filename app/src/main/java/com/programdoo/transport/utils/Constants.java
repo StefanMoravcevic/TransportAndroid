@@ -39,6 +39,7 @@ public class Constants {
     public static final String FRAG_EDIT_SETTINGS = "frag_editSettings";
     public static final String FRAG_EDIT_RECURRENCE_PATTERN = "frag_editRecurrencePattern";
     public static final String FRAG_NOTIFICATIONS = "frag_notifications";
+    public static final String FRAG_HISTORY_NOTIFICATIONS = "frag_history_notifications";
 
     public static final String FRAG_TRAVEL_ORDERS_LIST = "frag_travel_orders_list";
     public static final String FRAG_TRAVEL_ORDER_CREATE = "frag_travel_order_create";
