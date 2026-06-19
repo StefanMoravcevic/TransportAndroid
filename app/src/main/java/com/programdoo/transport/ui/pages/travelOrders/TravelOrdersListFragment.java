@@ -168,6 +168,17 @@ public class TravelOrdersListFragment extends BaseFragment {
 
         adapter = new TravelOrderRecyclerListAdapter();
 
+        adapter.setOnCameraClickListener(item -> {
+
+            selectedItem = item;
+
+            cameraHelper.openCamera(
+                    requireContext(),
+                    "travel_order_" + item.getId()
+            );
+
+        });
+
         binding.rvTravelOrders.setLayoutManager(
                 new LinearLayoutManager(getContext())
         );

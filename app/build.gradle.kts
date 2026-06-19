@@ -11,8 +11,8 @@ android {
 		applicationId = "com.programdoo.transport"
 		minSdk = 33
 		targetSdk = 35
-		versionCode = 1
-		versionName = "1.0"
+		versionCode = 4
+		versionName = "1.0.3"
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -47,6 +47,7 @@ dependencies {
 	implementation(libs.jwt.decode)
 	implementation ("com.google.android.gms:play-services-location:21.0.1")
 	implementation ("com.github.bumptech.glide:glide:4.16.0")
+	implementation("org.jsoup:jsoup:1.17.2")
 	annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
 	// api

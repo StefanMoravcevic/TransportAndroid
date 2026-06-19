@@ -23,6 +23,7 @@ import com.programdoo.transport.ui.pages.memberships.MembershipActivity;
 import com.programdoo.transport.ui.pages.notifications.NotificationActivity;
 import com.programdoo.transport.ui.pages.poolCarReservations.PoolCarReservationsActivity;
 import com.programdoo.transport.ui.pages.poolCarReservations.PoolCarReservationsListActivity;
+import com.programdoo.transport.ui.pages.receiptScan.ReceiptScanActivity;
 import com.programdoo.transport.ui.pages.scannedpackages.ScannedPackageActivity;
 import com.programdoo.transport.ui.pages.settings.SettingsActivity;
 import com.programdoo.transport.ui.pages.trainees.TraineesActivity;
@@ -147,6 +148,11 @@ public class MenuFragment extends BaseFragment {
 
         binding.tvDriverVehicleIssue.setOnClickListener(v -> {
             Intent i = new Intent(requireActivity(), DriverVehicleIssueActivity .class);
+            startActivity(i);
+        });
+
+        binding.tvReceiptScan.setOnClickListener(v -> {
+            Intent i = new Intent(requireActivity(), ReceiptScanActivity.class);
             startActivity(i);
         });
     }

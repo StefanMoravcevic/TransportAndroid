@@ -75,6 +75,10 @@
             android:name="com.programdoo.transport.ui.pages.driverVehicleIssues.DriverVehicleIssueActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name="com.programdoo.transport.ui.pages.receiptScan.ReceiptScanActivity"
+            android:exported="false">
+        </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.programdoo.transport.fileprovider"
