@@ -102,4 +102,7 @@
     <string name="label_image">Слика</string>
     <string name="label_succesfullyUploaded">Успешно закачен документ</string>
     <string name="label_notification_history">Историја обавештења</string>
+    <string name="label_scan_your_receipt">Скенирајте свој рачун</string>
+    <string name="label_receipt_scan">Скенирање рачуна</string>
+
 </resources>

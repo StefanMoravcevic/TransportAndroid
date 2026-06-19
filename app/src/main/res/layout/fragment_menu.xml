@@ -93,6 +93,18 @@
                     app:drawableTopCompat="@drawable/icon_menu_issues"/>
 
                 <TextView
+                    android:id="@+id/tvReceiptScan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:drawablePadding="4dp"
+                    android:gravity="center"
+                    android:text="@string/label_receipt_scan"
+                    android:layout_margin="12dp"
+                    app:drawableTint="@color/primary"
+                    app:drawableTopCompat="@drawable/icon_menu_scan"/>
+
+                <TextView
                     android:id="@+id/tvSettings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

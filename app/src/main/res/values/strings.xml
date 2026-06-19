@@ -102,6 +102,8 @@
     <string name="label_add_picture">Add picture</string>
     <string name="label_image">Image</string>
     <string name="label_notification_history">Notifications history</string>
+    <string name="label_scan_your_receipt">Scan your receipt</string>
+    <string name="label_receipt_scan">Receipt scan</string>
 
 
 

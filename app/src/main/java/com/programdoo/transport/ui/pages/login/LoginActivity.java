@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.programdoo.transport.R;
 import com.programdoo.transport.data.models.requests.accounts.TokenRequestModel;
+import com.programdoo.transport.data.services.LocationTrackingService;
 import com.programdoo.transport.databinding.ActivityLoginBinding;
 import com.programdoo.transport.ui.pages.menu.ClientMenuActivity;
 import com.programdoo.transport.ui.pages.menu.MenuActivity;
@@ -88,6 +89,14 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         viewModel.getIntentEvent().observe(this, t -> {
+
+            Intent serviceIntent = new Intent(LoginActivity.this, LocationTrackingService.class);
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startForegroundService(serviceIntent);
+            } else {
+                startService(serviceIntent);
+            }
             /* intent se koristi kad se prelazi iz jednog activity-ja u drugi.
              * prvi argument je instanca trenutnog activity-ja, drugi je klasa ciljnog activity-ja.
              * moguce je postaviti podatke u intent ako je potrebno preneti ih iz jednog u drugi

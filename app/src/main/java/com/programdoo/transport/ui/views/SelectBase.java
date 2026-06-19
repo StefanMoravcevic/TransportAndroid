@@ -116,9 +116,16 @@ public abstract class SelectBase extends LinearLayout {
         });
 
         til.setEndIconOnClickListener(v -> {
+            if (!this.isClickable)
+                return;
+
             Editable text = et.getText();
-            if (text != null && text.length() > 0 && this.isClickable)
+
+            if (text != null && text.length() > 0) {
                 adapter.clearSelection();
+            } else {
+                dialog.show();
+            }
         });
 
         UiUtil.updateEndIcon(til, clearIcon, dropdownIcon);

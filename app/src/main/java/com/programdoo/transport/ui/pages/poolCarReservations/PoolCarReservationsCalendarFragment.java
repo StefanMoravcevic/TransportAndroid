@@ -150,7 +150,6 @@ public class PoolCarReservationsCalendarFragment extends BaseFragment {
         binding.weekView.goToDate(cal);
     }
 
-    // ---------------- CALENDAR ----------------
 
     private void setupCalendar() {
 
